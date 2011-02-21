@@ -13,6 +13,7 @@ def shell_safe_exec(cmd)
   unless system(cmd)
     raise RuntimeError, "Error while executing #{cmd}" 
   end
+  $?
 end
 
 # Dynamically load the gem spec
