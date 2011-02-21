@@ -8,7 +8,7 @@ class MyApp < Sinatra::Base
     send_file File.expand_path('../jquery-1.4.4.min.js', __FILE__)
   end
   get '/nibjs.js' do
-    nibjs = Dir[File.expand_path('../../dist/*.js', __FILE__)].last
+    nibjs = Dir[File.expand_path('../../dist/*.js', __FILE__)].sort.last
     send_file nibjs
   end
   get '/fixture.js' do
