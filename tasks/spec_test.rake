@@ -2,7 +2,7 @@ begin
 
   desc "Build spec fixtures from coffee to js"
   task :build_spec_fixture do
-    shell_safe_exec("./bin/nibjs --coffee --uglify spec/fixture > spec/fixture.js")
+    shell_safe_exec("./bin/nibjs --coffee --uglify --output=spec/fixture.js spec/fixture")
   end
   
   desc "Run spec examples"

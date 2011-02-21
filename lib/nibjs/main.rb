@@ -18,6 +18,10 @@ module NibJS
     
     # Install options
     options do |opt|
+      @output = STDOUT
+      opt.on("-o", "--output=FILE", "Output in a specific file") do |value|
+        @output = value
+      end
       @coffee = false
       opt.on("-c", "--coffee", "Specify if sources are in coffeescript") do
         @coffee = true
@@ -132,7 +136,13 @@ module NibJS
     end
     
     def with_output
-      yield($stdout)
+      if String === @output 
+        File.open(@output, 'w'){|io|
+          yield(io)
+        }
+      else
+        yield(@output)
+      end
     end
 
     def execute(args)

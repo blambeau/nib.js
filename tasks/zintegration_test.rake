@@ -1,6 +1,6 @@
 begin
   
-  desc "Builds the integratio test" 
+  desc "Builds the integration test" 
   task :build_integration_test do
     shell_safe_exec("coffee --compile integration")
   end
