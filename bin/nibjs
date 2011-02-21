@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby -rrubygems
+$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+require "nibjs"
+NibJS::Main.run(ARGV)

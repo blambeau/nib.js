@@ -6,3 +6,4 @@ module NibJS
 end # module NibJS
 require "nibjs/version"
 require "nibjs/loader"
+require "nibjs/main"
