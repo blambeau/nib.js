@@ -16,16 +16,16 @@ module NibJS
     # Name of the library which is packaged
     attr_accessor :libname
     
-    # Compile the sources using coffee first?
+    # Compile the sources using coffee first
     attr_accessor :coffee
     
-    # Join the sources instead of treating them separately?
+    # Join the sources instead of treating them separately
     attr_accessor :join
     
-    # Invoke ugligyjs on result?
+    # Invoke ugligyjs on result
     attr_accessor :uglify
     
-    # Add 'libname = NibJS.require(libname)' at end of script?
+    # Add 'libname = NibJS.require(libname)' at end of script
     attr_accessor :autorequire
     
     # Path to a licencing file to add as header
@@ -41,19 +41,19 @@ module NibJS
         @libname = value
       end
       @autorequire = false
-      opt.on('-a','--autorequire', "Add 'libname = NibJS.require(libname)' at end of script?") do
+      opt.on('-a','--autorequire', "Add 'libname = NibJS.require(libname)' at end of script") do
         @autorequire = true
       end
       @coffee = false
-      opt.on("-c", "--coffee", "Compile the sources using coffee first? (requires coffee)") do
+      opt.on("-c", "--coffee", "Compile the sources using coffee first (requires coffee)") do
         @coffee = true
       end
       @join = false
-      opt.on('-j', '--join', "Join the sources instead of treating them separately?") do |value|
+      opt.on('-j', '--join', "Join the sources instead of treating them separately") do |value|
         @join = true
       end
       @uglify = false
-      opt.on('-u', '--[no-]uglify', "Invoke ugligyjs on result? (requires uglifyjs)") do |value| 
+      opt.on('-u', '--[no-]uglify', "Invoke ugligyjs on result (requires uglifyjs)") do |value| 
         @uglify = value
       end
       opt.separator('')
