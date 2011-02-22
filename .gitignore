@@ -4,4 +4,4 @@ pkg
 doc/api
 .yardoc
 .bundle
-spec/fixture.js
+test/spec/fixture.js

@@ -2,7 +2,7 @@ begin
   
   desc "Builds the integration test" 
   task :build_integration_test do
-    shell_safe_exec("coffee --compile integration")
+    shell_safe_exec("coffee --compile test/integration")
   end
   
   desc "Run integration tests"
@@ -10,7 +10,7 @@ begin
     puts "#"*100
     puts "Please open the URL below in your browser"
     puts "#"*100
-    puts shell_safe_exec("ruby integration/integration_test.rb").inspect
+    puts shell_safe_exec("ruby test/integration/integration_test.rb").inspect
   end
   
 ensure

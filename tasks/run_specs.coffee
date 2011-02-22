@@ -13,5 +13,5 @@ logger = (runner, log)->
   process.exit runner.results().failedCount
 
 # Execute nib's specs
-folder = __dirname + '/../spec'
+folder = __dirname + '/../test/spec'
 jasmine.executeSpecsInFolder folder, logger, isVerbose, showColors, "_spec.coffee$"
