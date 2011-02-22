@@ -6,39 +6,39 @@ module NibJS
       File.expand_path("../#{file}", __FILE__)
     end
     
-    def each
+    def each(s = 'fixture.js')
       (0...100).each{|i|
         meth = :"sc#{i}"
         if self.respond_to?(meth)
-          yield(self.send(meth))
+          source = _("../#{s}")
+          yield(self.send(meth, source))
         end
       }
     end
     
-    def sc0
-      [ _('../fixture.js') ]
+    def sc0(src)
+      [ src ]
     end
     
-    def sc1
-      [ 
-        "--libname=FixtureApp",
-        _('../fixture.js') 
-      ]
+    def sc1(src)
+      puts "On sc1: #{src}"
+      [ "--libname=FixtureApp", src ]
     end
     
-    def sc2
-      [ 
-        "--autorequire",
-        _('../fixture.js'),
-      ]
+    def sc2(src)
+      [ "--autorequire", src ]
     end
     
-    def sc3
-      [ 
-        "--libname=FixtureApp",
-        "--autorequire",
-        _('../fixture.js') 
-      ]
+    def sc3(src)
+      [ "--libname=FixtureApp", "--autorequire", src ]
+    end
+    
+    def sc4(src)
+      [ "--libname=FixtureApp", "--autorequire", "--uglify", src ]
+    end
+    
+    def sc5(src)
+      [ "--header=#{_('header.js')}", "--uglify", src ]
     end
     
     
