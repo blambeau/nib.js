@@ -18,7 +18,7 @@ describe "nibjs command" do
   
   NibJS::Scenarios.new.each_with_index('.js') do |options, i|
 
-    it "should behave as expected on sc n°#{i} (.js)" do
+    it "should behave as expected on sc#{i} (.js)" do
       nibjs(options).should == File.read(File.expand_path("../sc#{i}.exp", __FILE__))
     end
 
@@ -26,7 +26,7 @@ describe "nibjs command" do
 
   NibJS::Scenarios.new.each_with_index('.coffee') do |options, i|
 
-    it "should behave as expected on sc n°#{i} (.coffee)" do
+    it "should behave as expected on sc#{i} (.coffee)" do
       opts = ["--coffee"] + options 
       nibjs(opts).should == File.read(File.expand_path("../sc#{i}.exp", __FILE__))
     end
