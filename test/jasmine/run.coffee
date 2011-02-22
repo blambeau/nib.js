@@ -1,6 +1,4 @@
-require.paths.push __dirname + "/../../jasmine-node"
-require.paths.push __dirname + "/../src"
-
+require.paths.push __dirname + "/../../src"
 jasmine = require('jasmine-node')
 
 for key in jasmine
@@ -12,6 +10,6 @@ showColors = true
 logger = (runner, log)->
   process.exit runner.results().failedCount
 
-# Execute nib's specs
-folder = __dirname + '/../test/spec'
+# Execute nibjs jasmine specs
+folder = __dirname
 jasmine.executeSpecsInFolder folder, logger, isVerbose, showColors, "_spec.coffee$"
