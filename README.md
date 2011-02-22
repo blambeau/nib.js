@@ -62,3 +62,13 @@ Let assume that your project has the structure below.
          https://github.com/jashkenas/coffee-script/issues/#issue/1054 */
       var mylib = NibJS.require('mylib')
     </script>
+
+### See also
+
+This project is related to CommonJS Module specification. In a sense, it is an offline 
+"compiler" implementation of the version 1.0 of that specification (not even complete).
+I'll strongly consider any patch that would lead to respecting such specification more
+correctly!
+
+* http://wiki.commonjs.org/wiki/Modules/1.0
+* http://wiki.commonjs.org/wiki/Modules/CompiledModules
