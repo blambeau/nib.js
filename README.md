@@ -28,7 +28,7 @@ Let assume that your project has the structure below.
         bar_spec.[js,coffee]
       package.json
 
-EXAMPLE 1 (embedded javascript):
+### EXAMPLE 1 (embedded javascript):
 
   In a shell:
 
@@ -46,7 +46,7 @@ EXAMPLE 1 (embedded javascript):
       var mylib = NibJS.require('mylib')
     </script>
 
-EXAMPLE 2 (embedded coffeescript):
+### EXAMPLE 2 (embedded coffeescript):
 
   In a shell:
 
