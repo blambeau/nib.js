@@ -35,6 +35,9 @@ module NibJS
     # IO or filename where to output result
     attr_accessor :output
     
+    def initialize
+    end
+    
     # Install options
     options do |opt|
       @libname = File.basename(File.expand_path("."))
@@ -58,11 +61,11 @@ module NibJS
         @uglify = value
       end
       opt.separator('')
-      @output = STDOUT
+      @header = nil
       opt.on("--header=FILE", "Add a (licencing) header from a file") do |value|
         @header = value
       end
-      @output = STDOUT
+      #@output = STDOUT
       opt.on("-o", "--output=FILE", "Output in a specific file") do |value|
         @output = value
       end
@@ -198,7 +201,7 @@ module NibJS
 
     def execute(args)
       if args.size == 1
-        with_output{|io| io << compile(args[0])}
+        with_output{|io| io << compile(args[0]) }
       else
         raise Quickl::Help
       end
