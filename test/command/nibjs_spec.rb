@@ -23,10 +23,14 @@ describe "nibjs command" do
     end
 
   end
-    # it "should behave as expected on sc n°#{i} (.coffee)" do
-    #   opts = ["--coffee"] + options 
-    #   nibjs(opts).should == File.read(File.expand_path("../sc#{i}.exp", __FILE__))
-    # end
 
+  NibJS::Scenarios.new.each_with_index('.coffee') do |options, i|
+
+    it "should behave as expected on sc n°#{i} (.coffee)" do
+      opts = ["--coffee"] + options 
+      nibjs(opts).should == File.read(File.expand_path("../sc#{i}.exp", __FILE__))
+    end
+    
+  end
   
 end

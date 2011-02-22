@@ -20,7 +20,6 @@ module NibJS
     end
     
     def sc1(src)
-      puts "On sc1: #{src}"
       [ "--libname=FixtureApp", src ]
     end
     

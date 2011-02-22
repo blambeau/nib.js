@@ -1,5 +1,5 @@
-NibJS.define('fixture_js', function(nibjs){
-  nibjs.register('./app', function(exports, require){
+NibJS.define('fixture', function(nibjs) {
+  nibjs.register('./app', function(exports, require) {
     var App;
     exports.App = App = (function() {
       function App() {}
@@ -8,8 +8,9 @@ NibJS.define('fixture_js', function(nibjs){
       };
       return App;
     })();
+    return exports;
   });
-  nibjs.register('./dependent', function(exports, require){
+  nibjs.register('./dependent', function(exports, require) {
     var App, Dependent;
     App = require('./app').App;
     exports.Dependent = Dependent = (function() {
@@ -19,11 +20,13 @@ NibJS.define('fixture_js', function(nibjs){
       };
       return Dependent;
     })();
+    return exports;
   });
-  nibjs.register('./index', function(exports, require){
+  nibjs.register('./index', function(exports, require) {
     exports.App = require('./app').App;
     exports.Dependent = require('./dependent').Dependent;
+    return exports;
   });
   return nibjs.require('./index');
 });
-var fixture_js = NibJS.require('fixture_js');
+var fixture = NibJS.require('fixture');

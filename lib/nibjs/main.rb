@@ -99,14 +99,14 @@ module NibJS
     
     def with_js_registration(file)
       code = ""
-      code += "nibjs.register('#{file}', function(exports, require){\n"
+      code += "nibjs.register('#{file}', function(exports, require) {\n"
       code += yield.strip.gsub(/^/m, '  ') + "\n"
       code += "});\n"
     end
 
     def with_js_define(package)
       code = ""
-      code += "NibJS.define('#{package}', function(nibjs){\n"
+      code += "NibJS.define('#{package}', function(nibjs) {\n"
       code += yield.strip.gsub(/^/m, '  ') + "\n"
       code += "  return nibjs.require('./index');\n"
       code += "});\n"
@@ -169,7 +169,9 @@ module NibJS
     def compile(folder)
       folder = File.expand_path(folder)
       self.libname ||= File.basename(folder)
-      self.libname.gsub!(/\./, "_")
+      if self.libname =~ /(.*)\.\w/
+        self.libname = $1
+      end
       
       code = if coffee
         code = with_coffee_define(libname){
