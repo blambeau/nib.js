@@ -64,5 +64,4 @@ ensure
   task :test => :"test:fixture"
   task :test => :"test:rspec"
   task :test => :"test:jasmine"
-  task :test => :"test:integration"
 end

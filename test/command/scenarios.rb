@@ -7,20 +7,40 @@ module NibJS
     end
     
     def each
-      yield(sc1)
-      yield(sc2)
+      (0...100).each{|i|
+        meth = :"sc#{i}"
+        if self.respond_to?(meth)
+          yield(self.send(meth))
+        end
+      }
     end
     
-    def sc1
+    def sc0
       [ _('../fixture.js') ]
     end
     
-    def sc2
+    def sc1
       [ 
         "--libname=FixtureApp",
         _('../fixture.js') 
       ]
     end
+    
+    def sc2
+      [ 
+        "--autorequire",
+        _('../fixture.js'),
+      ]
+    end
+    
+    def sc3
+      [ 
+        "--libname=FixtureApp",
+        "--autorequire",
+        _('../fixture.js') 
+      ]
+    end
+    
     
   end # class Scenarios
 end # module NibJS

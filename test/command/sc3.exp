@@ -1,4 +1,4 @@
-NibJS.define('fixture_js', function(nibjs){
+NibJS.define('FixtureApp', function(nibjs){
   nibjs.register('./app', function(exports, require){
     var App;
     exports.App = App = (function() {
@@ -26,3 +26,4 @@ NibJS.define('fixture_js', function(nibjs){
   });
   return nibjs.require('./index');
 });
+var FixtureApp = NibJS.require('FixtureApp');

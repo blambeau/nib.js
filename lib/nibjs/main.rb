@@ -169,6 +169,7 @@ module NibJS
     def compile(folder)
       folder = File.expand_path(folder)
       self.libname ||= File.basename(folder)
+      self.libname.gsub!(/\./, "_")
       
       code = if coffee
         code = with_coffee_define(libname){

@@ -26,3 +26,4 @@ NibJS.define('fixture_js', function(nibjs){
   });
   return nibjs.require('./index');
 });
+var fixture_js = NibJS.require('fixture_js');
