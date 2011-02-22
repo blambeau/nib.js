@@ -186,7 +186,11 @@ module NibJS
             with_coffee_registration(reqname){ File.read(filepath) }
           }.join
         }
-        compile_coffee_source(code) if coffee_compile
+        if coffee_compile
+          compile_coffee_source(code) 
+        else
+          code
+        end
       else
         with_js_define(libname){
           collect_on_files(folder){|filepath, reqname|
@@ -196,8 +200,12 @@ module NibJS
       end
 
       # Add the autorequire line if requested
-      if autorequire
-        code += "var #{libname} = NibJS.require('#{libname}');\n"
+      if autorequire 
+        if (!coffee || coffee_compile)
+          code += "var #{libname} = NibJS.require('#{libname}');\n"
+        else
+          code += "#{libname} = NibJS.require '#{libname}'\n"
+        end
       end
       
       if header

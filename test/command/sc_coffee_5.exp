@@ -1,0 +1,24 @@
+NibJS.define 'FixtureApp', (nibjs)->
+  nibjs.register './index', (exports, require)->
+    exports.App = class App
+      
+      say_hello: ->
+        "Hello from App"
+    
+    return exports
+    
+    {App} = require('./app')
+    
+    exports.Dependent = class Dependent
+      
+      say_hello: ->
+        "Hello from Dependent"
+    
+    return exports
+    
+    exports.App = require('./app').App
+    exports.Dependent = require('./dependent').Dependent
+    return exports
+
+  nibjs.require './index'
+FixtureApp = NibJS.require 'FixtureApp'

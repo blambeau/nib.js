@@ -57,5 +57,17 @@ module NibJS
       [ "--libname=FixtureApp", "--coffee", "--join", src ]
     end
     
+    def sc_coffee_3(src)
+      [ "--libname=FixtureApp", "--coffee", "--no-coffee-compile", src ]
+    end
+    
+    def sc_coffee_4(src)
+      [ "--libname=FixtureApp", "--autorequire", "--coffee", "--no-coffee-compile", src ]
+    end
+    
+    def sc_coffee_5(src)
+      [ "--libname=FixtureApp", "--join", "--autorequire", "--coffee", "--no-coffee-compile", src ]
+    end
+    
   end # class Scenarios
 end # module NibJS
