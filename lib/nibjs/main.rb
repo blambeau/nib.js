@@ -1,3 +1,4 @@
+require 'nibjs'
 module NibJS
   #
   # nibjs - Package and embed node.js/coffeescript application in your browser
