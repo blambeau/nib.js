@@ -13,15 +13,30 @@ module NibJS
   #
   class Main < Quickl::Command(__FILE__, __LINE__)
     
+    # Name of the library which is packaged
     attr_accessor :libname
+    
+    # Compile the sources using coffee first?
     attr_accessor :coffee
+    
+    # Invoke ugligyjs at end of packaging?
     attr_accessor :uglify
+    
+    # Add an NibJS.require(libname) at end of script?
+    attr_accessor :autorequire
+    
+    # IO or filename where to output result
+    attr_accessor :output
     
     # Install options
     options do |opt|
       @libname = File.basename(File.expand_path("."))
       opt.on("--libname=X", "Specify the main library name") do |value|
         @libname = value
+      end
+      @autorequire = false
+      opt.on('-a','--autorequire', 'Require the application at end of the script') do
+        @autorequire = true
       end
       @output = STDOUT
       opt.on("-o", "--output=FILE", "Output in a specific file") do |value|
@@ -117,6 +132,7 @@ module NibJS
     end
 
     def compile(folder)
+      # compile it
       code = if coffee
         code = with_coffee_define(libname){
           files(folder).collect{|file|
@@ -133,20 +149,27 @@ module NibJS
           }.join("\n")
         }
       end
-      if uglify
-        with_temp_file(code){|f| safe_run("uglifyjs #{f.path}") }
-      else
-        code
+
+      # Add the autorequire line if requested
+      if autorequire
+        code += "var #{libname} = NibJS.require('#{libname}');\n"
       end
+      
+      # Uglify result now
+      if uglify
+        code = with_temp_file(code){|f| safe_run("uglifyjs #{f.path}") } 
+      end
+      
+      code
     end
     
     def with_output
-      if String === @output 
-        File.open(@output, 'w'){|io|
+      if String === output 
+        File.open(output, 'w'){|io|
           yield(io)
         }
       else
-        yield(@output)
+        yield(output)
       end
     end
 
