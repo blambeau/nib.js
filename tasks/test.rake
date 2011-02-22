@@ -22,6 +22,11 @@ begin
       abort 'rspec is not available. In order to run spec, you must: gem install rspec'
     end
   end
+  
+  desc "Run spec coverage"
+  task :"test:coverage" do
+    shell_safe_exec("rcov #{_('test/command/run.rb')}")
+  end
 
   desc "Compile test/fixture.min.js"
   task :"test:fixture.min" => :"test:fixture" do

@@ -1,18 +1,26 @@
 require File.expand_path('../scenarios', __FILE__)
 describe "nibjs command" do
   
-  def nibjs(*args)
+  def nibjs_real(*args)
     nibjs = File.expand_path('../../../bin/nibjs', __FILE__)
     `#{nibjs} #{args.flatten.join(' ')}`
   end
   
+  def nibjs(*args)
+    require File.expand_path('../../../lib/nibjs/main', __FILE__)
+    command = NibJS::Main.new
+    command.output = []
+    command.run(args.flatten)
+    command.output.join('')
+  end
+  
   it 'should have a --version' do
-    x = nibjs %w{--version}
+    x = nibjs_real %w{--version}
     x.should =~ /(c)/
   end
   
   it 'should have a --help' do
-    x = nibjs %w{--help}
+    x = nibjs_real %w{--help}
     x.should =~ /DESCRIPTION/
   end
   
