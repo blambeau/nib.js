@@ -24,19 +24,27 @@ describe "nibjs command" do
     x.should =~ /DESCRIPTION/
   end
   
-  NibJS::Scenarios.new.each_with_index('.js') do |options, i|
+  NibJS::Scenarios.new.common_tests_with_index('.js') do |options, i|
 
-    it "should behave as expected on sc#{i} (.js)" do
-      nibjs(options).should == File.read(File.expand_path("../sc#{i}.exp", __FILE__))
+    it "should behave as expected on #{i}" do
+      nibjs(options).should == File.read(File.expand_path("../#{i}.exp", __FILE__))
     end
 
   end
 
-  NibJS::Scenarios.new.each_with_index('.coffee') do |options, i|
+  NibJS::Scenarios.new.common_tests_with_index('.coffee') do |options, i|
 
-    it "should behave as expected on sc#{i} (.coffee)" do
+    it "should behave as expected on #{i}" do
       opts = ["--coffee"] + options 
-      nibjs(opts).should == File.read(File.expand_path("../sc#{i}.exp", __FILE__))
+      nibjs(opts).should == File.read(File.expand_path("../#{i}.exp", __FILE__))
+    end
+    
+  end
+  
+  NibJS::Scenarios.new.coffee_tests_with_index do |options, i|
+
+    it "should behave as expected on #{i}" do
+      nibjs(options).should == File.read(File.expand_path("../#{i}.exp", __FILE__))
     end
     
   end

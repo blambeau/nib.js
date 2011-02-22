@@ -17,8 +17,11 @@ module NibJS
     # Name of the library which is packaged
     attr_accessor :libname
     
-    # Compile the sources using coffee first
+    # Look for .coffee files
     attr_accessor :coffee
+    
+    # Compile .coffee files
+    attr_accessor :coffee_compile
     
     # Join the sources instead of treating them separately
     attr_accessor :join
@@ -50,8 +53,12 @@ module NibJS
         @autorequire = true
       end
       @coffee = false
-      opt.on("-c", "--coffee", "Compile the sources using coffee first (requires coffee)") do
+      opt.on("-c", "--coffee", "Look for .coffee instead of .js files (requires coffee)") do
         @coffee = true
+      end
+      @coffee_compile = true
+      opt.on("--[no-]coffee-compile", "Compile .coffee sources to javascript (requires coffee)") do |value|
+        @coffee_compile = value
       end
       @join = false
       opt.on('-j', '--join', "Join the sources instead of treating them separately") do |value|
@@ -160,7 +167,7 @@ module NibJS
       end
     end
 
-    def coffee_compile(code)
+    def compile_coffee_source(code)
       with_temp_file(code){|f|
         safe_run("cat #{f.path} | coffee --compile --stdio --bare")
       }
@@ -179,7 +186,7 @@ module NibJS
             with_coffee_registration(reqname){ File.read(filepath) }
           }.join
         }
-        coffee_compile(code)
+        compile_coffee_source(code) if coffee_compile
       else
         with_js_define(libname){
           collect_on_files(folder){|filepath, reqname|

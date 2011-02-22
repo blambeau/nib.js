@@ -55,13 +55,13 @@ begin
     require _("test/command/scenarios")
 
     def boot_nibjs(options, i)
-      output = _("test/command/sc#{i}.exp")
+      output = _("test/command/#{i}.exp")
       nibjs(options, "--output=#{output}")
     end
     
-    NibJS::Scenarios.new.each_with_index{|options, i|
-      boot_nibjs(options, i)
-    }
+    scs = NibJS::Scenarios.new
+    scs.common_tests_with_index{|options, i| boot_nibjs(options, i) }
+    scs.coffee_tests_with_index{|options, i| boot_nibjs(options, i) }
   end
   
 ensure

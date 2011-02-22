@@ -1,0 +1,26 @@
+NibJS.define('FixtureApp', function(nibjs) {
+  nibjs.register('./index', function(exports, require) {
+    var App, Dependent;
+    exports.App = App = (function() {
+      function App() {}
+      App.prototype.say_hello = function() {
+        return "Hello from App";
+      };
+      return App;
+    })();
+    return exports;
+    App = require('./app').App;
+    exports.Dependent = Dependent = (function() {
+      function Dependent() {}
+      Dependent.prototype.say_hello = function() {
+        return "Hello from Dependent";
+      };
+      return Dependent;
+    })();
+    return exports;
+    exports.App = require('./app').App;
+    exports.Dependent = require('./dependent').Dependent;
+    return exports;
+  });
+  return nibjs.require('./index');
+});
