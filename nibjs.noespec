@@ -5,10 +5,6 @@ template-info:
   manifest:
     Rakefile:
       safe-override: false
-    tasks/spec_test.rake:
-      safe-override: false
-    tasks/unit_test.rake:
-      safe-override: false
 
 # The following entries are template-related variables. Update to match your 
 # own configuration.

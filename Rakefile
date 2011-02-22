@@ -16,6 +16,20 @@ def shell_safe_exec(cmd)
   $?
 end
 
+def _(path)
+  File.join(File.dirname(__FILE__), path)
+end
+
+def dist(target)
+  shell_safe_exec("cat src/nibjs.coffee | coffee --bare --compile --stdio > #{target}")
+  code = ""
+  code += File.read("LICENCE.js")
+  code += "(function(exports){\n"
+  code += File.read(target).gsub(/^/m, "  ")
+  code += "}).call(this, this)"
+  File.open(target, "w"){|io| io << code}
+end
+  
 # Dynamically load the gem spec
 $gemspec_file = File.expand_path('../nibjs.gemspec', __FILE__)
 $gemspec      = Kernel.eval(File.read($gemspec_file))

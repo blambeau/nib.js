@@ -18,7 +18,7 @@ describe "NibJS", ->
     expect(NibJS.isRunning("Hello world!")).toEqual true
     
   it 'should support embedding .js applications in browser', ->
-    require('./fixture')
+    require('../fixture')
     
     # Require it
     fix = NibJS.require('fixture')
