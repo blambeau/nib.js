@@ -4,6 +4,7 @@ pkg
 doc/api
 .yardoc
 .bundle
+.gemtest
 test/fixture.js
 test/fixture.min.js
 test/nibjs.js

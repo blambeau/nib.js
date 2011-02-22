@@ -16,7 +16,12 @@
     },
     require: function(name) {
       var _base, _ref;
-      return (_ref = (_base = NibJS.packages)[name]) != null ? _ref : _base[name] = NibJS.pkgBuilders[name](new Builder());
+      return (_ref = (_base = NibJS.packages)[name]) != null ? _ref : _base[name] = NibJS._build_one(name);
+    },
+    _build_one: function(name) {
+      var builder;
+      builder = new Builder;
+      return NibJS.pkgBuilders[name](builder);
     },
     pending: [],
     running: [],
