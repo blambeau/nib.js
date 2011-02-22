@@ -19,6 +19,9 @@ module NibJS
     # Compile the sources using coffee first?
     attr_accessor :coffee
     
+    # Join the sources instead of treating them separately?
+    attr_accessor :join
+    
     # Invoke ugligyjs on result?
     attr_accessor :uglify
     
@@ -44,6 +47,10 @@ module NibJS
       @coffee = false
       opt.on("-c", "--coffee", "Compile the sources using coffee first? (requires coffee)") do
         @coffee = true
+      end
+      @join = false
+      opt.on('-j', '--join', "Join the sources instead of treating them separately?") do |value|
+        @join = true
       end
       @uglify = false
       opt.on('-u', '--[no-]uglify', "Invoke ugligyjs on result? (requires uglifyjs)") do |value| 
@@ -125,11 +132,18 @@ module NibJS
     
     ###
     
-    def files(folder)
-      if coffee
+    def collect_on_files(folder)
+      files = if coffee
         Dir["#{folder}/**/*.coffee"]
       else
         Dir["#{folder}/**/*.js"]
+      end
+      if join
+        files.sort!
+        content = files.collect{|f| File.read(f)}.join("\n")
+        [ with_temp_file(content){|f| yield(f.path, 'index')} ]
+      else
+        files.collect{|f| yield(f, f[(1+folder.size)..-8])}
       end
     end
 
@@ -143,17 +157,15 @@ module NibJS
       # compile it
       code = if coffee
         code = with_coffee_define(libname){
-          files(folder).collect{|file|
-            rel = file[(1+folder.size)..-8]
-            with_coffee_registration("./#{rel}"){ File.read(file) }
+          collect_on_files(folder){|filepath, filename|
+            with_coffee_registration("./#{filename}"){ File.read(filepath) }
           }.join("\n")
         }
         coffee_compile(code)
       else
         with_js_define(File.basename(folder)){
-          files(folder).collect{|file|
-            rel = file[(1+folder.size)..-8]
-            with_js_registration("./#{rel}"){ File.read(file) }
+          collect_on_files(folder).collect{|filepath, filename|
+            with_js_registration("./#{filename}"){ File.read(filepath) }
           }.join("\n")
         }
       end
@@ -177,9 +189,7 @@ module NibJS
     
     def with_output
       if String === output 
-        File.open(output, 'w'){|io|
-          yield(io)
-        }
+        File.open(output, 'w'){|io| yield(io) }
       else
         yield(output)
       end
