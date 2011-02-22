@@ -165,7 +165,7 @@ module NibJS
         coffee_compile(code)
       else
         with_js_define(File.basename(folder)){
-          collect_on_files(folder).collect{|filepath, filename|
+          collect_on_files(folder){|filepath, filename|
             with_js_registration("./#{filename}"){ File.read(filepath) }
           }.join("\n")
         }
