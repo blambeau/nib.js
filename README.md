@@ -54,7 +54,8 @@ Let assume that your project has the structure below.
 
   In the browser:
 
-    <script src="js/nibjs.js"     type="text/javascript">
+    <script src="js/coffee-script.js" type="text/javascript">
+    <script src="js/nibjs.js" type="text/javascript">
     <script src="js/mylib.coffee" type="text/coffeescript">
     <script>
       /* But be warned of coffeescript's issue 1054

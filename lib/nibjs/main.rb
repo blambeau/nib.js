@@ -37,6 +37,7 @@ module NibJS
   #
   #   In the browser:
   #
+  #     <script src="js/coffee-script.js" type="text/javascript">
   #     <script src="js/nibjs.js" type="text/javascript">
   #     <script src="js/mylib.js" type="text/javascript">
   #     <script>
