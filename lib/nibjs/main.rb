@@ -19,11 +19,14 @@ module NibJS
     # Compile the sources using coffee first?
     attr_accessor :coffee
     
-    # Invoke ugligyjs at end of packaging?
+    # Invoke ugligyjs on result?
     attr_accessor :uglify
     
-    # Add an NibJS.require(libname) at end of script?
+    # Add 'libname = NibJS.require(libname)' at end of script?
     attr_accessor :autorequire
+    
+    # Path to a licencing file to add as header
+    attr_accessor :header
     
     # IO or filename where to output result
     attr_accessor :output
@@ -35,20 +38,25 @@ module NibJS
         @libname = value
       end
       @autorequire = false
-      opt.on('-a','--autorequire', 'Require the application at end of the script') do
+      opt.on('-a','--autorequire', "Add 'libname = NibJS.require(libname)' at end of script?") do
         @autorequire = true
+      end
+      @coffee = false
+      opt.on("-c", "--coffee", "Compile the sources using coffee first? (requires coffee)") do
+        @coffee = true
+      end
+      @uglify = false
+      opt.on('-u', '--[no-]uglify', "Invoke ugligyjs on result? (requires uglifyjs)") do |value| 
+        @uglify = value
+      end
+      opt.separator('')
+      @output = STDOUT
+      opt.on("--header=FILE", "Add a (licencing) header from a file") do |value|
+        @header = value
       end
       @output = STDOUT
       opt.on("-o", "--output=FILE", "Output in a specific file") do |value|
         @output = value
-      end
-      @coffee = false
-      opt.on("-c", "--coffee", "Specify if sources are in coffeescript") do
-        @coffee = true
-      end
-      @uglify = false
-      opt.on('-u', '--[no-]uglify', "Minimize generated javascript (requires uglifyjs)") do |value| 
-        @uglify = value
       end
       opt.on_tail("--help", "Show help") do
         raise Quickl::Help
@@ -153,6 +161,10 @@ module NibJS
       # Add the autorequire line if requested
       if autorequire
         code += "var #{libname} = NibJS.require('#{libname}');\n"
+      end
+      
+      if header
+        code = File.read(header) + "\n" + code
       end
       
       # Uglify result now
