@@ -22,8 +22,11 @@ variables:
   summary: 
     nib.js - Package and embed node.js or coffeescript libraries in the browser
   description: |-
-    nib.js helps you packaging your node.js or coffeescript libraries for being
-    embedded in the browser.
+    nib.js is a NibJS javascript library allowing to maintain javascript projects ala 'node.js'
+    (modules, exports, require) while also targetting a web browser as execution platform. It
+    contains a simple packager command (nibjs) that will convert your sources to a single and
+    minified .js file to be embedded in the browser. Node.js's exports and require are correctly
+    bounded.
   authors:
     - name: Bernard Lambeau
       email: blambeau@gmail.com

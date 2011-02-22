@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
   #
   # The description should be more detailed than the summary.  For example,
   # you might wish to copy the entire README into the description.
-  s.description = "nib.js helps you packaging your node.js or coffeescript libraries for being\nembedded in the browser."
+  s.description = "nib.js is a NibJS javascript library allowing to maintain javascript projects ala 'node.js'\n(modules, exports, require) while also targetting a web browser as execution platform. It\ncontains a simple packager command (nibjs) that will convert your sources to a single and\nminified .js file to be embedded in the browser. Node.js's exports and require are correctly\nbounded."
   
   # The URL of this gem home page (optional)
   s.homepage = "http://github.com/blambeau/nib.js"
