@@ -13,11 +13,16 @@ module NibJS
   #
   class Main < Quickl::Command(__FILE__, __LINE__)
     
+    attr_accessor :libname
     attr_accessor :coffee
     attr_accessor :uglify
     
     # Install options
     options do |opt|
+      @libname = File.basename(File.expand_path("."))
+      opt.on("--libname=X", "Specify the main library name") do |value|
+        @libname = value
+      end
       @output = STDOUT
       opt.on("-o", "--output=FILE", "Output in a specific file") do |value|
         @output = value
@@ -113,7 +118,7 @@ module NibJS
 
     def compile(folder)
       code = if coffee
-        code = with_coffee_define(File.basename(folder)){
+        code = with_coffee_define(libname){
           files(folder).collect{|file|
             rel = file[(1+folder.size)..-8]
             with_coffee_registration("./#{rel}"){ File.read(file) }
