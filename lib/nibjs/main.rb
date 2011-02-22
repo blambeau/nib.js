@@ -36,6 +36,7 @@ module NibJS
     attr_accessor :output
     
     def initialize
+      @output = STDOUT
     end
     
     # Install options
@@ -153,7 +154,7 @@ module NibJS
 
     def coffee_compile(code)
       with_temp_file(code){|f|
-        safe_run("cat #{f.path} | coffee --compile --stdio --bare #{f.path}")
+        safe_run("cat #{f.path} | coffee --compile --stdio --bare")
       }
     end
 
