@@ -1,4 +1,3 @@
-require.paths.push __dirname + "/../../src"
 jasmine = require('jasmine-node')
 
 for key in jasmine

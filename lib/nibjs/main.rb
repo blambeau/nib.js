@@ -41,7 +41,7 @@ module NibJS
     
     # Install options
     options do |opt|
-      @libname = File.basename(File.expand_path("."))
+      @libname = nil
       opt.on("--libname=X", "Specify the main library name") do |value|
         @libname = value
       end
@@ -83,14 +83,14 @@ module NibJS
     def with_coffee_registration(file)
       code = ""
       code += "nibjs.register '#{file}', (exports, require)->\n"
-      code += yield.gsub(/^/m, '  ')
-      code += "\n\n"
+      code += yield.strip.gsub(/^/m, '  ') + "\n"
+      code += "\n"
     end
 
     def with_coffee_define(package)
       code = ""
       code += "NibJS.define '#{package}', (nibjs)->\n"
-      code += yield.gsub(/^/m, '  ')
+      code += yield.strip.gsub(/^/m, '  ') + "\n"
       code += "\n"
       code += "  nibjs.require './index'\n"
     end
@@ -100,16 +100,15 @@ module NibJS
     def with_js_registration(file)
       code = ""
       code += "nibjs.register('#{file}', function(exports, require){\n"
-      code += yield.gsub(/^/m, '  ')
-      code += "});\n\n"
+      code += yield.strip.gsub(/^/m, '  ') + "\n"
+      code += "});\n"
     end
 
     def with_js_define(package)
       code = ""
       code += "NibJS.define('#{package}', function(nibjs){\n"
-      code += yield.gsub(/^/m, '  ')
-      code += "\n"
-      code += "  nibjs.require('./index');\n"
+      code += yield.strip.gsub(/^/m, '  ') + "\n"
+      code += "  return nibjs.require('./index');\n"
       code += "});\n"
     end
     
@@ -137,6 +136,15 @@ module NibJS
     
     ###
     
+    def file2require(root_folder, file)
+      root_folder, file = File.expand_path(root_folder), File.expand_path(file)
+      stripped = file[(1+root_folder.size)..-1]
+      stripped =~ /(.*)\.(js|coffee)$/
+      "./#{$1}"
+    end
+    
+    ###
+    
     def collect_on_files(folder)
       files = if coffee
         Dir["#{folder}/**/*.coffee"]
@@ -146,9 +154,9 @@ module NibJS
       if join
         files.sort!
         content = files.collect{|f| File.read(f)}.join("\n")
-        [ with_temp_file(content){|f| yield(f.path, 'index')} ]
+        [ with_temp_file(content){|f| yield(f.path, './index')} ]
       else
-        files.collect{|f| yield(f, f[(1+folder.size)..-8])}
+        files.collect{|f| yield(f, file2require(folder, f))}
       end
     end
 
@@ -159,19 +167,21 @@ module NibJS
     end
 
     def compile(folder)
-      # compile it
+      folder = File.expand_path(folder)
+      self.libname ||= File.basename(folder)
+      
       code = if coffee
         code = with_coffee_define(libname){
-          collect_on_files(folder){|filepath, filename|
-            with_coffee_registration("./#{filename}"){ File.read(filepath) }
-          }.join("\n")
+          collect_on_files(folder){|filepath, reqname|
+            with_coffee_registration(reqname){ File.read(filepath) }
+          }.join
         }
         coffee_compile(code)
       else
-        with_js_define(File.basename(folder)){
-          collect_on_files(folder){|filepath, filename|
-            with_js_registration("./#{filename}"){ File.read(filepath) }
-          }.join("\n")
+        with_js_define(libname){
+          collect_on_files(folder){|filepath, reqname|
+            with_js_registration(reqname){ File.read(filepath) }
+          }.join
         }
       end
 

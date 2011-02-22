@@ -29,6 +29,11 @@ def dist(target)
   code += "}).call(this, this)"
   File.open(target, "w"){|io| io << code}
 end
+
+def nibjs(*args)
+  nibjs = _('bin/nibjs')
+  shell_safe_exec "#{nibjs} #{args.flatten.join(' ')}"
+end
   
 # Dynamically load the gem spec
 $gemspec_file = File.expand_path('../nibjs.gemspec', __FILE__)

@@ -1,4 +1,4 @@
-global.NibJS = require('nibjs').NibJS
+global.NibJS = require('../nibjs').NibJS
 
 describe "NibJS", ->
 
@@ -18,10 +18,11 @@ describe "NibJS", ->
     expect(NibJS.isRunning("Hello world!")).toEqual true
     
   it 'should support embedding .js applications in browser', ->
-    require('../fixture')
+    require('../fixture.min')
     
     # Require it
     fix = NibJS.require('fixture')
+    expect(fix).toBeDefined
     expect(fix.App).toBeDefined
     expect(fix.Dependent).toBeDefined
     

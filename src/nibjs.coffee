@@ -50,7 +50,15 @@ exports.NibJS = {
     #   Foo.Bar = ...
     #
     require: (name)->
-      NibJS.packages[name] ?= NibJS.pkgBuilders[name](new Builder())
+      NibJS.packages[name] ?= NibJS._build_one(name)
+    
+    #
+    # Internal implementation of require, when invoked the first time on
+    # a given library.
+    #  
+    _build_one: (name)->
+      builder = new Builder
+      NibJS.pkgBuilders[name](builder)
 
     # Application control
     pending: []

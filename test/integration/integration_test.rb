@@ -16,7 +16,7 @@ class MyApp < Sinatra::Base
     send_file _('../nibjs.js')
   end
   get '/fixture.js' do
-    send_file _('../fixture.js')
+    send_file _('../fixture.min.js')
   end
   get '/integration_test.js' do
     send_file _('integration_test.js')

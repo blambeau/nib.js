@@ -1,0 +1,28 @@
+NibJS.define('fixture.js', function(nibjs){
+  nibjs.register('./app', function(exports, require){
+    var App;
+    exports.App = App = (function() {
+      function App() {}
+      App.prototype.say_hello = function() {
+        return "Hello from App";
+      };
+      return App;
+    })();
+  });
+  nibjs.register('./dependent', function(exports, require){
+    var App, Dependent;
+    App = require('./app').App;
+    exports.Dependent = Dependent = (function() {
+      function Dependent() {}
+      Dependent.prototype.say_hello = function() {
+        return "Hello from Dependent";
+      };
+      return Dependent;
+    })();
+  });
+  nibjs.register('./index', function(exports, require){
+    exports.App = require('./app').App;
+    exports.Dependent = require('./dependent').Dependent;
+  });
+  return nibjs.require('./index');
+});

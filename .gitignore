@@ -5,4 +5,5 @@ doc/api
 .yardoc
 .bundle
 test/fixture.js
+test/fixture.min.js
 test/nibjs.js
