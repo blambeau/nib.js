@@ -10,7 +10,54 @@ module NibJS
   # #{summarized_options}
   #
   # DESCRIPTION
-  #   Package an application from sources in FOLDER
+  #   This command packages a complete javascript/coffeescript as a single .js file 
+  #   to be embedded in the browser. Basically, it defines Node.js's exports and 
+  #   require to work nicely. For this, we expect a project structure that respect
+  #   Node.js's package conventions (exports, require, index): 
+  #
+  #     mylib/
+  #       dist/
+  #       src/
+  #         foo.[js,coffee]            # exports.Foo = ...
+  #         bar.[js,coffee]            # require('./foo')
+  #         index.[js,coffee]          # exports.X = ...
+  #       spec/
+  #         foo_spec.[js,coffee]
+  #         bar_spec.[js,coffee]
+  #
+  # EXAMPLE 1 (embedded javascript):
+  #
+  #   In a shell:
+  #
+  #       # if the sources are .js
+  #       nibjs --libname=mylib --output=mylib.js src
+  #
+  #       # if the sources are .coffee
+  #       nibjs --coffee --libname=mylib --output=mylib.js src
+  #
+  #   In the browser:
+  #
+  #     <script src="js/nibjs.js" type="text/javascript">
+  #     <script src="js/mylib.js" type="text/javascript">
+  #     <script>
+  #       var mylib = NibJS.require('mylib')
+  #     </script>
+  #
+  # EXAMPLE 2 (embedded coffeescript):
+  #
+  #   In a shell:
+  #
+  #     nibjs --coffee --no-coffee-compile --libname=mylib --output=mylib.coffee src
+  #
+  #   In the browser:
+  #
+  #     <script src="js/nibjs.js"     type="text/javascript">
+  #     <script src="js/mylib.coffee" type="text/coffeescript">
+  #     <script>
+  #       /* But be warned of coffeescript's issue 1054
+  #          https://github.com/jashkenas/coffee-script/issues/#issue/1054 */
+  #       var mylib = NibJS.require('mylib')
+  #     </script>
   #
   class Main < Quickl::Command(__FILE__, __LINE__)
     

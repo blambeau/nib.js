@@ -20,34 +20,44 @@ Let assume that your project has the structure below.
     mylib/
       dist/
       src/
-        foo.[js,coffee]            # exports.Foo = ...
-        bar.[js,coffee]            # require('./foo')
-        index.[js,coffee]          # exports.X = ...
+        foo.[js,coffee]          # exports.Foo = ...
+        bar.[js,coffee]          # require('./foo')
+        index.[js,coffee]        # exports.X = ...
       spec/
         foo_spec.[js,coffee]
         bar_spec.[js,coffee]
       package.json
 
-To package all source files while respecting exports and require semantics, you just have to
-execute the following command:
-    
-    nibjs [--coffee] --libname=mylib --output=dist/mylib-1.0.0.js src
-    
-In the browser, you'll have to include nibjs.js and mylib.js and then requiring your lib to 
-NibJS:
+EXAMPLE 1 (embedded javascript):
 
-    <script src="js/nibjs-1.0.0.min.js" type="text/javascript">
-    <script src="js/mylib-1.0.0.min.js" type="text/javascript">
+  In a shell:
+
+    # if the sources are .js
+    nibjs --libname=mylib --output=mylib.js src
+
+    # if the sources are .coffee
+    nibjs --coffee --libname=mylib --output=mylib.js src
+
+  In the browser:
+
+    <script src="js/nibjs.js" type="text/javascript">
+    <script src="js/mylib.js" type="text/javascript">
     <script>
-      <!-- assuming jquery as well -->
-      $(document).ready(function(){
-        // Require the name you passed as --libname at nibjs packaging time
-        // mylib contains your index's exports (mylib.X is defined, for example)
-        var mylib = NibJS.require('mylib')
-      });
+      var mylib = NibJS.require('mylib')
     </script>
 
-## Links
+EXAMPLE 2 (embedded coffeescript):
 
-http://github.com/blambeau/nib.js
+  In a shell:
 
+    nibjs --coffee --no-coffee-compile --libname=mylib --output=mylib.coffee src
+
+  In the browser:
+
+    <script src="js/nibjs.js"     type="text/javascript">
+    <script src="js/mylib.coffee" type="text/coffeescript">
+    <script>
+      /* But be warned of coffeescript's issue 1054
+         https://github.com/jashkenas/coffee-script/issues/#issue/1054 */
+      var mylib = NibJS.require('mylib')
+    </script>
