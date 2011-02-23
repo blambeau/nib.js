@@ -148,3 +148,4 @@ NibJS.define 'fixture', (nibjs)->
     return exports
 
   nibjs.require './index'
+fixture = NibJS.require 'fixture'

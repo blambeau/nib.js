@@ -104,3 +104,4 @@ NibJS.define('fixture', function(nibjs) {
   });
   return nibjs.require('./index');
 });
+var fixture = NibJS.require('fixture');

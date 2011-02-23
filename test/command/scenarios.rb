@@ -58,7 +58,7 @@ module NibJS
     end
     
     def sc_common_8(src)
-      [ "--standalone", src ]
+      [ "-sa", src ]
     end
     
     def sc_common_9(src)
@@ -90,7 +90,7 @@ module NibJS
     end
     
     def sc_coffee_7(src)
-      [ "--coffee", "--no-coffee-compile", "--standalone", src ]
+      [ "--coffee", "--no-coffee-compile", "-sa", src ]
     end
     
   end # class Scenarios
