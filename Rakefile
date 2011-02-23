@@ -26,7 +26,7 @@ def dist(target)
   code += File.read("LICENCE.js")
   code += "(function(exports){\n"
   code += File.read(target).gsub(/^/m, "  ")
-  code += "}).call(this, this)"
+  code += "}).call(this, this);"
   File.open(target, "w"){|io| io << code}
 end
 

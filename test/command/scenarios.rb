@@ -57,6 +57,14 @@ module NibJS
       [ "--footer=#{_('footer.js')}", src ]
     end
     
+    def sc_common_8(src)
+      [ "--standalone", src ]
+    end
+    
+    def sc_common_9(src)
+      [  "--header=#{_('header.js')}", "--footer=#{_('footer.js')}", "-sua", src ]
+    end
+    
     def sc_coffee_1(src)
       [ "--libname=FixtureApp", "--coffee", src ]
     end
@@ -75,6 +83,14 @@ module NibJS
     
     def sc_coffee_5(src)
       [ "--libname=FixtureApp", "--join", "--autorequire", "--coffee", "--no-coffee-compile", src ]
+    end
+    
+    def sc_coffee_6(src)
+      [ "--coffee", "--standalone", src ]
+    end
+    
+    def sc_coffee_7(src)
+      [ "--coffee", "--no-coffee-compile", "--standalone", src ]
     end
     
   end # class Scenarios

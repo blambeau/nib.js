@@ -18,6 +18,9 @@ module NibJS
   #
   class Main < Quickl::Command(__FILE__, __LINE__)
     
+    # Source folder that we compile
+    attr_accessor :folder
+    
     # Name of the library which is packaged
     attr_accessor :libname
     
@@ -35,6 +38,9 @@ module NibJS
     
     # Add 'libname = NibJS.require(libname)' at end of script
     attr_accessor :autorequire
+    
+    # Embed NibJS in output
+    attr_accessor :standalone
     
     # Path to a licencing file to add as header
     attr_accessor :header
@@ -89,6 +95,10 @@ module NibJS
       @uglify = false
       opt.on('-u', '--[no-]uglify', "Invoke ugligyjs on result (requires uglifyjs)") do |value| 
         @uglify = value
+      end
+      @standalone = false
+      opt.on('-s', '--[no-]standalone', "Embed NibJS itself in the output") do |value| 
+        @standalone = value
       end
       opt.separator("\nABOUT\n")
       opt.on_tail("--help", "Show help") do
@@ -157,6 +167,14 @@ module NibJS
     
     ###
     
+    def normalize_libname(folder, libname)
+      libname ||= File.basename(folder)
+      if libname =~ /(.*)\.\w/
+        libname = $1
+      end
+      libname
+    end
+    
     def coffee_output?
       coffee && !coffee_compile
     end
@@ -190,15 +208,9 @@ module NibJS
         safe_run("cat #{f.path} | coffee --compile --stdio --bare")
       }
     end
-
-    def compile(folder)
-      folder = File.expand_path(folder)
-      self.libname ||= File.basename(folder)
-      if self.libname =~ /(.*)\.\w/
-        self.libname = $1
-      end
-      
-      code = if coffee
+    
+    def __main_compile
+      if coffee
         code = with_coffee_define(libname){
           collect_on_files(folder){|filepath, reqname|
             with_coffee_registration(reqname){ File.read(filepath) }
@@ -216,42 +228,81 @@ module NibJS
           }.join
         }
       end
+    end
 
-      # Add the autorequire line if requested
+    ###
+    
+    def with_autorequire
+      code = yield
       if autorequire 
         if coffee_output?
           code += "#{libname} = NibJS.require '#{libname}'\n"
         else
           code += "var #{libname} = NibJS.require('#{libname}');\n"
         end
+      else 
+        code
       end
-      
-      if header
-        code = File.read(header) + "\n" + code
-      end
-      if footer 
-        code += "\n" + File.read(footer)
-      end
-      
-      # Uglify result now
-      if uglify
-        code = with_temp_file(code){|f| safe_run("uglifyjs #{f.path}") } 
-      end
-      
-      code
     end
     
-    def with_output
-      if String === output 
-        File.open(output, 'w'){|io| yield(io) }
+    def with_standalone
+      if standalone
+        code = if coffee_output?
+          File.read(File.expand_path('../../../src/nibjs.coffee', __FILE__))
+        else
+          File.read(File.expand_path("../../../dist/nibjs-#{NibJS::VERSION}.js", __FILE__))
+        end
+        code += "\n\n" + yield
       else
-        yield(output)
+        yield
       end
     end
 
+    def with_header_and_footer
+      code = ""
+      if header
+        code += File.read(header) + "\n"
+      end
+      code += yield
+      if footer 
+        code += "\n" + File.read(footer)
+      end
+      code
+    end
+    
+    def with_uglify
+      if uglify
+        with_temp_file(yield){|f| safe_run("uglifyjs #{f.path}") } 
+      else 
+        yield
+      end
+    end
+
+    def with_output
+      if String === output 
+        File.open(output, 'w'){|io| io << yield }
+      else
+        output << yield
+      end
+    end
+
+    def compile
+      with_output{
+        with_uglify{
+          with_header_and_footer{
+            with_standalone{
+              with_autorequire{ __main_compile }
+            }
+          }
+        }
+      }
+    end
+    
     def execute(args)
       if args.size == 1
-        with_output{|io| io << compile(args[0]) }
+        @folder  = File.expand_path(args[0])
+        @libname = normalize_libname(@folder, @libname)
+        compile
       else
         raise Quickl::Help
       end
