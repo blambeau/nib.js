@@ -4,7 +4,8 @@ TestSuite = {
     '1-basic',
     '2-coffee',
     '3-embedded-coffee',
-    '4-coffee-join'
+    '4-coffee-join',
+    '5-standalone',
   ],
   
   indexOf: (test)->

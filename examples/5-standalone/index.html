@@ -6,15 +6,14 @@
   
   <!-- This is your application -->
   <script src="http://code.jquery.com/jquery-1.5.min.js" type="text/javascript"></script>
-  <script src="../public/nibjs.js" type="text/javascript"></script>
-  <script src="coffee-join.js" type="text/javascript"></script>
+  <script src="standalone.js" type="text/javascript"></script>
   <script>
     $(document).ready(function(){
       //
       // this is how you require your application. App will now contain whatever 
       // your index.js has exported.
       //
-      App = NibJS.require('coffee-join').App;
+      App = NibJS.require('standalone').App;
       console.log(App);
       //
       // Let me profit from your browser and run the integration tests :-)
@@ -32,23 +31,21 @@
     <a id="forkme" href="http://github.com/blambeau/nib.js"></a>
     <div id="content">
       <div id="feedback"><img src="../public/test-pending.gif"/></div>
-      <h2>Do exports.XXX and require('./XXX') look painful?</h2>
+      <h2>Your users don't even need NibJS as runtime dependency!</h2>
       <p class="comment">
-        Sometimes, you simply want to maintain your code source "as if it were in a single file"
-        but still splitting different features in different files... In that case, you would like 
-        to avoid having to exports and require everything everytime.
+        By default, you need to include <code>nibjs.js</code> to your webpage in order
+        to implement the CommonJS module specification. However if you plan to redistribute
+        your library, having NibJS as dependency may not be friendly for your own users.
       </p>
       <div style="text-align:center">
         <img src="illustrate.png" width="80%">
       </div>
       <p class="comment">
-        This should only be used if your code 1) has no name clash accross different files and 2) 
-        has no particular dependency order.
+        In that case packaging a self-contained .js file containing NibJS itself makes sense:
       </p>
     </div>
     <div id="navigation">
-      <a href="../3-embedded-coffee/index.html" class="button" id="leftnav"></a>
-      <a href="../5-standalone/index.html" class="button" id="rightnav"></a>
+      <a href="../4-coffee-join/index.html" class="button" id="leftnav"></a>
       <div style="clear:both"></div>
     </div>
   </body>

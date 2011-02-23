@@ -15,7 +15,7 @@ body{
   background-repeat: no-repeat;
 }
 #feedback {
-  position: fixed;
+  float: left;
   height: 96px;
   padding: 10px 0px;
   vertical-align: middle;

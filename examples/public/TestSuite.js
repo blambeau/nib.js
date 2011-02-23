@@ -1,7 +1,7 @@
 var TestSuite;
 var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 TestSuite = {
-  tests: ['1-basic', '2-coffee', '3-embedded-coffee', '4-coffee-join'],
+  tests: ['1-basic', '2-coffee', '3-embedded-coffee', '4-coffee-join', '5-standalone'],
   indexOf: function(test) {
     var i, t, _len, _ref;
     _ref = TestSuite.tests;

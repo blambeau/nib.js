@@ -2,6 +2,6 @@
 require File.expand_path('../../commons', __FILE__)
 here = File.dirname(__FILE__)
 lib = File.join(here, 'lib')
-options = %q{--coffee --libname=coffee}
-output = File.join(here, 'coffee.js')
+options = %q{--coffee --join --standalone --libname=standalone}
+output = File.join(here, 'standalone.js')
 nibjs(options, __output(output), lib)

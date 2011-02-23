@@ -1,12 +1,4 @@
 #!/usr/bin/env ruby
-
-###
-### Following lines are equivalent to the following
-### (invoked in 1-basic dir):
-###
-###   nibjs --coffee --no-coffee-compile --libname=embedded-coffee --output=embedded-coffee.coffee lib
-###
-
 require File.expand_path('../../commons', __FILE__)
 here = File.dirname(__FILE__)
 lib = File.join(here, 'lib')
