@@ -2,21 +2,6 @@ global.NibJS = require('../nibjs').NibJS
 
 describe "NibJS", ->
 
-  it 'should support register / start / query scenario', ->
-    ran = null
-    fn = ()->
-      ran = "Hello world!"
-      
-    # Mark it as ready
-    NibJS.ready(fn)
-
-    # Start it now
-    NibJS.start()
-    expect( ran ).toEqual "Hello world!"
-    
-    # Verify that it is running
-    expect(NibJS.isRunning("Hello world!")).toEqual true
-    
   it 'should support embedding .js applications in browser', ->
     require('../fixture.min')
     
@@ -29,3 +14,12 @@ describe "NibJS", ->
     # Check it
     expect((new fix.App).say_hello()).toEqual "Hello from App"
     expect((new fix.Dependent).say_hello()).toEqual "Hello from Dependent"
+
+  it 'should raise with a friendly message on external require error', ->
+    lambda = ->
+      NibJS.require('no such one')
+    expect(lambda).toThrow(NibJS.Exception)
+    try 
+      lambda()
+    catch err
+      expect(err.message).toMatch /no such one/

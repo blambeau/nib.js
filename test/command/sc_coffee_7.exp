@@ -57,28 +57,16 @@ exports.NibJS = {
     # a given library.
     #  
     _build_one: (name)->
-      builder = new Builder
-      NibJS.pkgBuilders[name](builder)
+      if NibJS.pkgBuilders[name]
+        builder = new Builder
+        NibJS.pkgBuilders[name](builder)
+      else
+        throw new Exception("NibJS error: no module '#{name}' has been previously registered.")
 
-    # Application control
-    pending: []
-
-    running: []
-
-    ready: (fn)->
-      NibJS.pending.push(fn)
-
-    start: ()->
-      for fn in NibJS.pending
-        NibJS.running.push(fn())
-      NibJS.pending = []
-
-    isRunning: (fn)->
-      for c in NibJS.running
-        return true if c is fn
-      return false
-    
   }
+  
+  class Exception extends Error
+    constructor: (@message)->
 
   #
   # Intra-package builder, passed as first argument of NibJS.define
@@ -119,9 +107,12 @@ exports.NibJS = {
     # Private functions that ensures the building of a file.
     #
     build_file: (file)=>
-      exports = {}
-      @builders[file](exports, this.require)
-      exports
+      if @builders[file]?
+        exports = {}
+        @builders[file](exports, this.require)
+        exports
+      else
+       throw new Exception("NibJS error: no such file #{file}")
 
 NibJS.define 'fixture', (nibjs)->
   nibjs.register './app', (exports, require)->

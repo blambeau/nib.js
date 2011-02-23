@@ -6,8 +6,15 @@
  * http://github.com/blambeau/nib.js
  */
 (function(exports){
-  var Builder;
-  var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+  var Builder, Exception;
+  var __hasProp = Object.prototype.hasOwnProperty, __extends = function(child, parent) {
+    for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; }
+    function ctor() { this.constructor = child; }
+    ctor.prototype = parent.prototype;
+    child.prototype = new ctor;
+    child.__super__ = parent.prototype;
+    return child;
+  }, __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
   exports.NibJS = {
     pkgBuilders: [],
     packages: [],
@@ -20,35 +27,21 @@
     },
     _build_one: function(name) {
       var builder;
-      builder = new Builder;
-      return NibJS.pkgBuilders[name](builder);
-    },
-    pending: [],
-    running: [],
-    ready: function(fn) {
-      return NibJS.pending.push(fn);
-    },
-    start: function() {
-      var fn, _i, _len, _ref;
-      _ref = NibJS.pending;
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        fn = _ref[_i];
-        NibJS.running.push(fn());
+      if (NibJS.pkgBuilders[name]) {
+        builder = new Builder;
+        return NibJS.pkgBuilders[name](builder);
+      } else {
+        throw new Exception("NibJS error: no module '" + name + "' has been previously registered.");
       }
-      return NibJS.pending = [];
-    },
-    isRunning: function(fn) {
-      var c, _i, _len, _ref;
-      _ref = NibJS.running;
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        c = _ref[_i];
-        if (c === fn) {
-          return true;
-        }
-      }
-      return false;
     }
   };
+  Exception = (function() {
+    __extends(Exception, Error);
+    function Exception(message) {
+      this.message = message;
+    }
+    return Exception;
+  })();
   Builder = (function() {
     function Builder() {
       this.build_file = __bind(this.build_file, this);;
@@ -65,10 +58,14 @@
     };
     Builder.prototype.build_file = function(file) {
       var exports;
-      exports = {};
-      this.builders[file](exports, this.require);
-      return exports;
+      if (this.builders[file] != null) {
+        exports = {};
+        this.builders[file](exports, this.require);
+        return exports;
+      } else {
+        throw new Exception("NibJS error: no such file " + file);
+      }
     };
     return Builder;
   })();
-}).call(this, this)
+}).call(this, this);
