@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>NibJS - Basic Example</title>
+  <link rel="stylesheet" type="text/css" href="../style.css">
+  <script src="http://code.jquery.com/jquery-1.5.min.js" type="text/javascript"></script>
+  <script src="basic.js" type="text/javascript"></script>
+  <script>
+    function runTests(app) {
+      setTimeout(function(){
+        var ok = false;
+        try { ok = app.runTests(); } 
+        catch (err) { ok = false; }
+        $("#feedback img").attr('src', '../test-' + ok + '.png');
+      }, 200);
+    };
+    $(document).ready(function(){
+      App = NibJS.require('basic').App;
+      runTests(App);
+    });
+  </script>
+</head>
+  <body>
+    <div id="feedback"><img src="../test-pending.gif"/></div>
+  </body>
+</html>
