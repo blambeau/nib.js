@@ -83,6 +83,9 @@ module NibJS
     # Path to a licencing file to add as header
     attr_accessor :header
     
+    # Path to a file to add as footer
+    attr_accessor :footer
+    
     # IO or filename where to output result
     attr_accessor :output
     
@@ -97,8 +100,8 @@ module NibJS
         @libname = value
       end
       @autorequire = false
-      opt.on('-a','--autorequire', "Add 'libname = NibJS.require(libname)' at end of script") do
-        @autorequire = true
+      opt.on('-a', '--[no-]autorequire', "Add 'libname = NibJS.require(libname)' at end of script") do |value|
+        @autorequire = value
       end
       @coffee = false
       opt.on("-c", "--coffee", "Look for .coffee instead of .js files (requires coffee)") do
@@ -109,8 +112,8 @@ module NibJS
         @coffee_compile = value
       end
       @join = false
-      opt.on('-j', '--join', "Join the sources instead of treating them separately") do |value|
-        @join = true
+      opt.on('-j', '--[no-]join', "Join the sources instead of treating them separately") do |value|
+        @join = value
       end
       @uglify = false
       opt.on('-u', '--[no-]uglify', "Invoke ugligyjs on result (requires uglifyjs)") do |value| 
@@ -120,6 +123,10 @@ module NibJS
       @header = nil
       opt.on("--header=FILE", "Add a (licencing) header from a file") do |value|
         @header = value
+      end
+      @header = nil
+      opt.on("--footer=FILE", "Add a footer from a file") do |value|
+        @footer = value
       end
       #@output = STDOUT
       opt.on("-o", "--output=FILE", "Output in a specific file") do |value|
@@ -258,6 +265,9 @@ module NibJS
       
       if header
         code = File.read(header) + "\n" + code
+      end
+      if footer 
+        code += "\n" + File.read(footer)
       end
       
       # Uglify result now

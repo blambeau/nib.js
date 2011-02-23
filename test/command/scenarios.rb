@@ -49,6 +49,14 @@ module NibJS
       [ "--header=#{_('header.js')}", "--uglify", src ]
     end
     
+    def sc_common_6(src)
+      [ "-au", src ]
+    end
+    
+    def sc_common_7(src)
+      [ "--footer=#{_('footer.js')}", src ]
+    end
+    
     def sc_coffee_1(src)
       [ "--libname=FixtureApp", "--coffee", src ]
     end
