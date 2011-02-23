@@ -6,7 +6,6 @@ module NibJS
   # SYNOPSIS
   #   #{program_name} [--help] [--version] [FOLDER]
   #
-  # OPTIONS
   # #{summarized_options}
   #
   # DESCRIPTION
@@ -15,50 +14,7 @@ module NibJS
   #   require to work nicely. For this, we expect a project structure that respect
   #   Node.js's package conventions (exports, require, index): 
   #
-  #     mylib/
-  #       dist/
-  #       src/
-  #         foo.[js,coffee]            # exports.Foo = ...
-  #         bar.[js,coffee]            # require('./foo')
-  #         index.[js,coffee]          # exports.X = ...
-  #       spec/
-  #         foo_spec.[js,coffee]
-  #         bar_spec.[js,coffee]
-  #
-  # EXAMPLE 1 (embedded javascript):
-  #
-  #   In a shell:
-  #
-  #       # if the sources are .js
-  #       nibjs --libname=mylib --output=mylib.js src
-  #
-  #       # if the sources are .coffee
-  #       nibjs --coffee --libname=mylib --output=mylib.js src
-  #
-  #   In the browser:
-  #
-  #     <script src="js/coffee-script.js" type="text/javascript">
-  #     <script src="js/nibjs.js" type="text/javascript">
-  #     <script src="js/mylib.js" type="text/javascript">
-  #     <script>
-  #       var mylib = NibJS.require('mylib')
-  #     </script>
-  #
-  # EXAMPLE 2 (embedded coffeescript):
-  #
-  #   In a shell:
-  #
-  #     nibjs --coffee --no-coffee-compile --libname=mylib --output=mylib.coffee src
-  #
-  #   In the browser:
-  #
-  #     <script src="js/nibjs.js"     type="text/javascript">
-  #     <script src="js/mylib.coffee" type="text/coffeescript">
-  #     <script>
-  #       /* But be warned of coffeescript's issue 1054
-  #          https://github.com/jashkenas/coffee-script/issues/#issue/1054 */
-  #       var mylib = NibJS.require('mylib')
-  #     </script>
+  #   See typical use cases at http://blambeau.github.com/nibjs
   #
   class Main < Quickl::Command(__FILE__, __LINE__)
     
@@ -95,6 +51,7 @@ module NibJS
     
     # Install options
     options do |opt|
+      opt.separator("MAIN OPTIONS")
       @libname = nil
       opt.on("--libname=X", "Specify the main library name") do |value|
         @libname = value
@@ -103,23 +60,6 @@ module NibJS
       opt.on('-a', '--[no-]autorequire', "Add 'libname = NibJS.require(libname)' at end of script") do |value|
         @autorequire = value
       end
-      @coffee = false
-      opt.on("-c", "--coffee", "Look for .coffee instead of .js files (requires coffee)") do
-        @coffee = true
-      end
-      @coffee_compile = true
-      opt.on("--[no-]coffee-compile", "Compile .coffee sources to javascript (requires coffee)") do |value|
-        @coffee_compile = value
-      end
-      @join = false
-      opt.on('-j', '--[no-]join', "Join the sources instead of treating them separately") do |value|
-        @join = value
-      end
-      @uglify = false
-      opt.on('-u', '--[no-]uglify', "Invoke ugligyjs on result (requires uglifyjs)") do |value| 
-        @uglify = value
-      end
-      opt.separator('')
       @header = nil
       opt.on("--header=FILE", "Add a (licencing) header from a file") do |value|
         @header = value
@@ -132,6 +72,25 @@ module NibJS
       opt.on("-o", "--output=FILE", "Output in a specific file") do |value|
         @output = value
       end
+      opt.separator("\nCOFFEESCRIPT\n")
+      @coffee = false
+      opt.on("-c", "--coffee", "Look for .coffee instead of .js files (requires coffee)") do
+        @coffee = true
+      end
+      @coffee_compile = true
+      opt.on("--[no-]coffee-compile", "Compile .coffee sources to javascript (requires coffee)") do |value|
+        @coffee_compile = value
+      end
+      opt.separator("\nEXTRAS\n")
+      @join = false
+      opt.on('-j', '--[no-]join', "Join the sources instead of treating them separately") do |value|
+        @join = value
+      end
+      @uglify = false
+      opt.on('-u', '--[no-]uglify', "Invoke ugligyjs on result (requires uglifyjs)") do |value| 
+        @uglify = value
+      end
+      opt.separator("\nABOUT\n")
       opt.on_tail("--help", "Show help") do
         raise Quickl::Help
       end
