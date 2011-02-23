@@ -198,6 +198,10 @@ module NibJS
     
     ###
     
+    def coffee_output?
+      coffee && !coffee_compile
+    end
+    
     def file2require(root_folder, file)
       root_folder, file = File.expand_path(root_folder), File.expand_path(file)
       stripped = file[(1+root_folder.size)..-1]
@@ -256,10 +260,10 @@ module NibJS
 
       # Add the autorequire line if requested
       if autorequire 
-        if (!coffee || coffee_compile)
-          code += "var #{libname} = NibJS.require('#{libname}');\n"
-        else
+        if coffee_output?
           code += "#{libname} = NibJS.require '#{libname}'\n"
+        else
+          code += "var #{libname} = NibJS.require('#{libname}');\n"
         end
       end
       

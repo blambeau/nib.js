@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    nibjs (1.0.0)
+    nibjs (1.1.0)
       bundler (~> 1.0)
       quickl (~> 0.2.0)
 
