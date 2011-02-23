@@ -18,6 +18,9 @@
   exports.NibJS = {
     pkgBuilders: [],
     packages: [],
+    hasPackage: function(name) {
+      return (NibJS.pkgBuilders[name] != null) || (NibJS.packages[name] != null);
+    },
     define: function(name, buildFn) {
       return NibJS.pkgBuilders[name] = buildFn;
     },

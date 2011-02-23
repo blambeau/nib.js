@@ -21,6 +21,12 @@ exports.NibJS = {
     packages: []
 
     #
+    # Checks if a package is known.
+    #
+    hasPackage: (name)->
+      NibJS.pkgBuilders[name]? || NibJS.packages[name]?
+
+    #
     # Defines a package via a name and a builder function. 
     #
     # Builder functions are expected to build the package thanks to a Builder
