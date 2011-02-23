@@ -25,7 +25,7 @@ TestSuite = {
     if next?
       moveNext = ->
         window.location = "../#{next}/index.html##{next}"
-      setTimeout(moveNext, 1000)
+      setTimeout(moveNext, 500)
   
   runOne: (app)=>
     runit = ()->
@@ -37,6 +37,6 @@ TestSuite = {
         $("body").append "<p>#{err.message}</p>"
         $("#feedback img").attr 'src', "../public/test-false.png"
         throw err
-    setTimeout runit, 1000
+    setTimeout runit, 500
   
 }

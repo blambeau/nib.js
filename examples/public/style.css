@@ -2,25 +2,66 @@ body{
 	font-family: corbel, 'lucida grande', helvetica, sans-serif;
 	font-size: 24px;
 	color: #212122;
-  width: 600px;
+  width: 1000px;
   margin: 100px auto;  
 }
 #feedback {
   position: fixed;
-  height: 75px;
+  height: 96px;
+  padding: 10px 0px;
+  vertical-align: middle;
 }
-#should {
+h2 {
+  font-size: 28px;
+  height: 96px;
+  padding: 5px 0px;
   padding-left: 80px;
-  height: 75px;
+  margin: 0px;
+}
+#hello {
+  margin-top: 45px;
 }
 .comment {
   text-align: justify;
 	font-size: 16px;
 }
-h1 {
+pre {
   text-align: center;
   font-size: 24px;
+  margin: 25px 0px;
 }
-.tip {
-  display: none;
+#content {
+  padding: 0px 125px;
+}
+#content ul {
+  padding-left: 100px;
+}
+#navigation {
+  position: absolute;
+  width: 1000px;
+  top: 0px;
+  padding-top: 300px;
+  margin: auto;
+}
+.button {
+  display: block;
+  width: 154px;
+  height: 200px;
+  background-repeat: no-repeat;
+}
+#leftnav {
+  float: left;
+  background-image: url(leftnav_bw.png);
+  left: 50px;
+}
+#leftnav:hover {
+  background-image: url(leftnav.png);
+}
+#rightnav {
+  float: right;
+  background-image: url(rightnav_bw.png);
+  right: 50px;
+}
+#rightnav:hover {
+  background-image: url(rightnav.png);
 }

@@ -6,6 +6,7 @@
   
   <!-- This is your application -->
   <script src="http://code.jquery.com/jquery-1.5.min.js" type="text/javascript"></script>
+  <script src="../public/nibjs.js" type="text/javascript"></script>
   <script src="coffee-join.js" type="text/javascript"></script>
   <script>
     $(document).ready(function(){
@@ -28,18 +29,29 @@
 
 </head>
   <body>
-    <div id="feedback"><img src="../public/test-pending.gif"/></div>
-    <p id="should">exports.XXX and require('./XXX') is painful?</p>
-    <p class="comment">
-      Sometimes, you simply want to maintain your code source "as if it were in a single file"
-      but still splitting different features in different files... In other words, your code:
-      <ul class="comment">
-        <li>has no name clash accross different files</li>
-        <li>has no particular inclusion order</li>
-      </ul>
-    </p>
-    <p class="comment">In that case, you would like to avoid having to exports and require 
-    everything everytime.</p>
-    <div id="hello"></div>
+    <div id="content">
+      <div id="feedback"><img src="../public/test-pending.gif"/></div>
+      <h2>Do exports.XXX and require('./XXX') look painful?</h2>
+      <p class="comment">
+        Sometimes, you simply want to maintain your code source "as if it were in a single file"
+        but still splitting different features in different files... In that case, you would like 
+        to avoid having to exports and require everything everytime.
+      </p>
+      <div style="text-align:center">
+        <img src="illustrate.png" width="80%">
+      </div>
+      <p class="comment">
+        Please note that this should only be used if your code:
+        <ul class="comment">
+          <li>has no name clash accross different files</li>
+          <li>has no particular inclusion order</li>
+        </ul>
+      </p>
+    </div>
+    <div id="navigation">
+      <a href="../2-coffee/index.html" class="button" id="leftnav"></a>
+      <a href="../4-coffee-join/index.html" class="button" id="rightnav"></a>
+      <div style="clear:both"></div>
+    </div>
   </body>
 </html>

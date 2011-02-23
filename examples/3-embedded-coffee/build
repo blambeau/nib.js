@@ -4,12 +4,12 @@
 ### Following lines are equivalent to the following
 ### (invoked in 1-basic dir):
 ###
-###   nibjs --coffee --no-coffee-compile --standalone --libname=embedded-coffee --output=embedded-coffee.coffee lib
+###   nibjs --coffee --no-coffee-compile --libname=embedded-coffee --output=embedded-coffee.coffee lib
 ###
 
 require File.expand_path('../../commons', __FILE__)
 here = File.dirname(__FILE__)
 lib = File.join(here, 'lib')
-options = %q{--coffee --no-coffee-compile --standalone --libname=embedded-coffee}
+options = %q{--coffee --no-coffee-compile --libname=embedded-coffee}
 output = File.join(here, 'embedded-coffee.coffee')
 nibjs(options, __output(output), lib)

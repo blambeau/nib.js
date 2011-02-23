@@ -4,12 +4,12 @@
 ### Following lines are equivalent to the following
 ### (invoked in 1-basic dir):
 ###
-###   nibjs --standalone --libname=basic --output=basic.js lib
+###   nibjs --libname=basic --output=basic.js lib
 ###
 
 require File.expand_path('../../commons', __FILE__)
 here = File.dirname(__FILE__)
 lib = File.join(here, 'lib')
-options = %q{--standalone --libname=basic}
+options = %q{--libname=basic}
 output = File.join(here, 'basic.js')
 nibjs(options, __output(output), lib)

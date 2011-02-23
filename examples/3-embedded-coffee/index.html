@@ -7,6 +7,7 @@
   <!-- This is your application -->
   <script src="http://code.jquery.com/jquery-1.5.min.js" type="text/javascript"></script>
   <script src="../public/coffee-script.js" type="text/javascript"></script>
+  <script src="../public/nibjs.js" type="text/javascript"></script>
   <script src="embedded-coffee.coffee" type="text/coffeescript"></script>
   <script>
     /* this is what we should have without coffeescript's issue 1054
@@ -42,13 +43,25 @@
 
 </head>
   <body>
-    <div id="feedback"><img src="../public/test-pending.gif"/></div>
-    <p id="should">Why not sending CoffeeScript to the browser?</p>
-    <p class="comment">
-      In addition to the previous example, the coffeescript source of this example is compiled by the browser
-      instead of being prepared by nibjs at packaging time. This coffeescript/nibjs feature is useful when coffee
-      compiler is not easily available on the server.
-    </p>
-    <div id="hello"></div>
+    <div id="content">
+      <div id="feedback"><img src="../public/test-pending.gif"/></div>
+      <h2>Or even embedding CoffeeScript directly in the browser!</h2>
+      <p class="comment">
+        In addition to the previous example, the coffeescript source of this example is compiled by the browser
+        instead of being prepared by nibjs at packaging time. This coffeescript/nibjs feature is useful when coffee
+        compiler is not easily available on the server.
+      </p>
+      <div style="text-align:center">
+        <img src="illustrate.png" width="80%">
+      </div>
+      <p class="comment">
+        Please be aware that making so is not really recommended for production use...
+      </p>
+    </div>
+    <div id="navigation">
+      <a href="../2-coffee/index.html" class="button" id="leftnav"></a>
+      <a href="../4-coffee-join/index.html" class="button" id="rightnav"></a>
+      <div style="clear:both"></div>
+    </div>
   </body>
 </html>

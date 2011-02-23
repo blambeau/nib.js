@@ -6,6 +6,7 @@
 
   <!-- This is your application -->
   <script src="http://code.jquery.com/jquery-1.5.min.js" type="text/javascript"></script>
+  <script src="../public/nibjs.js" type="text/javascript"></script>
   <script src="basic.js" type="text/javascript"></script>
   <script>
     $(document).ready(function(){
@@ -28,8 +29,25 @@
   
 </head>
   <body>
-    <div id="feedback"><img src="../public/test-pending.gif"/></div>
-    <p id="should">The example should say hello to the world, in upcase characters.</p>
-    <div id="hello"></div>
+    <div id="content">
+      <div id="feedback"><img src="../public/test-pending.gif"/></div>
+      <h2>NibJS - Package CommonJS applications for the browser</h2>
+      <p class="comment">
+        NibJS packages javascript and coffeescript applications for the browser. It comes
+        with a simple <code>nibjs</code> commandline tool that includes a lot of options!
+      </p>
+      <div style="text-align:center">
+        <img src="illustrate.png" width="80%">
+      </div>
+      <p class="comment">
+        The basic use case is really simple, you want to concatenate <code>lib/**/*.js</code>
+        files, while respecting CommonJS conventions about <code>exports</code> and <code>require</code>.
+      </p>
+    </div>
+    <div id="navigation">
+      <a href="#" class="button" id="leftnav"></a>
+      <a href="../2-coffee/index.html" class="button" id="rightnav"></a>
+      <div style="clear:both"></div>
+    </div>
   </body>
 </html>

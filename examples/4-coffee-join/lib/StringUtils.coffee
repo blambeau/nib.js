@@ -1,6 +1,6 @@
 StringUtils = {
   
-  upcase: (what)->
-    what.toUpperCase()
+  pre: (what)->
+    "<pre>#{what}</pre>"
   
 }

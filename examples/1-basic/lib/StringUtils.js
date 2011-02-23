@@ -1,7 +1,7 @@
 exports.StringUtils = {
   
-  upcase: function(what){
-    return what.toUpperCase();
+  pre: function(what) {
+    return "<pre>" + what + "</pre>";
   }
   
 };
