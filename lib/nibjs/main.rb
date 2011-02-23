@@ -14,7 +14,7 @@ module NibJS
   #   require to work nicely. For this, we expect a project structure that respect
   #   Node.js's package conventions (exports, require, index): 
   #
-  #   See typical use cases at http://blambeau.github.com/nibjs
+  #   See typical use cases at http://blambeau.github.com/nib.js
   #
   class Main < Quickl::Command(__FILE__, __LINE__)
     
