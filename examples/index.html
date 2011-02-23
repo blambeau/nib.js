@@ -4,16 +4,29 @@
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <title>NibJS - package [java/coffee]script applications for the browser</title>
   <script src="http://code.jquery.com/jquery-1.5.min.js" type="text/javascript"></script>
-  <script>
-    var myGlobal = true;
-    $(document).ready(function(){
-      window.location = '1-basic/index.html#1-basic';
-    });
-  </script>
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="public/style.css">
 </head>
   <body>
-    <div id="feedback"><img src="../test-pending.gif"/></div>
-    <p id="should">The example should say hello to the world, in upcase characters.</p>
+    <a id="forkme" href="http://github.com/blambeau/nib.js"></a>
+    <div id="content">
+      <div id="feedback"><img src="public/test-true.png"/></div>
+      <h2>NibJS - Package CommonJS applications for the browser</h2>
+      <p class="comment">
+        NibJS packages javascript and coffeescript applications for the browser. It implements 
+        the module specification of CommonJS to let you develop and test under node.js while 
+        ensuring that you'll be able to deploy inside a browser without pain.
+      </p>
+      <div style="text-align:center">
+        <img src="illustrate.png" width="80%">
+      </div>
+      <p class="comment">
+        NibJS is distributed as a rubygem under a MIT licence. 
+      </p>
+    </div>
+    <div id="navigation">
+      <a href="../1-basic/index.html" class="button" id="rightnav"></a>
+      <div style="clear:both"></div>
+    </div>
+    <pre>gem install nibjs</pre>
   </body>
 </html>

@@ -5,6 +5,15 @@ body{
   width: 1000px;
   margin: 100px auto;  
 }
+#forkme {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 200px;
+  height: 200px;
+  background-image: url(forkme.png);
+  background-repeat: no-repeat;
+}
 #feedback {
   position: fixed;
   height: 96px;
@@ -35,6 +44,12 @@ pre {
 }
 #content ul {
   padding-left: 100px;
+}
+#content img {
+  padding: 25px 0px;
+}
+#feedback img {
+  padding: 0px;
 }
 #navigation {
   position: absolute;

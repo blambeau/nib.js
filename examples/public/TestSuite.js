@@ -31,7 +31,7 @@ TestSuite = {
       moveNext = function() {
         return window.location = "../" + next + "/index.html#" + next;
       };
-      return setTimeout(moveNext, 1000);
+      return setTimeout(moveNext, 500);
     }
   },
   runOne: __bind(function(app) {
@@ -48,6 +48,6 @@ TestSuite = {
         throw err;
       }
     };
-    return setTimeout(runit, 1000);
+    return setTimeout(runit, 500);
   }, this)
 };
