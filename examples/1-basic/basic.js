@@ -111,7 +111,7 @@ NibJS.define('basic', function(nibjs) {
       
       runTests: function(){
         var hello = exports.Foo.sayHello("world");
-        $("body").append("<p>" + hello + "</p>");
+        $("body").append("<h1>" + hello + "</h1>");
         return true;
       }
       
