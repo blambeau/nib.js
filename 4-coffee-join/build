@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+require File.expand_path('../../commons', __FILE__)
+here = File.dirname(__FILE__)
+lib = File.join(here, 'lib')
+options = %q{--coffee --join --libname=coffee-join}
+output = File.join(here, 'coffee-join.js')
+nibjs(options, __output(output), lib)

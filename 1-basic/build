@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+require File.expand_path('../../commons', __FILE__)
+here = File.dirname(__FILE__)
+lib = File.join(here, 'lib')
+options = %q{--libname=basic}
+output = File.join(here, 'basic.js')
+nibjs(options, __output(output), lib)

@@ -1,0 +1,82 @@
+body{
+	font-family: corbel, 'lucida grande', helvetica, sans-serif;
+	font-size: 24px;
+	color: #212122;
+  width: 1000px;
+  margin: 100px auto;  
+}
+#forkme {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 200px;
+  height: 200px;
+  background-image: url(forkme.png);
+  background-repeat: no-repeat;
+}
+#feedback {
+  float: left;
+  height: 96px;
+  padding: 10px 0px;
+  vertical-align: middle;
+}
+h2 {
+  font-size: 28px;
+  height: 96px;
+  padding: 5px 0px;
+  padding-left: 80px;
+  margin: 0px;
+}
+#hello {
+  margin-top: 45px;
+}
+.comment {
+  text-align: justify;
+	font-size: 16px;
+}
+pre {
+  text-align: center;
+  font-size: 24px;
+  margin: 25px 0px;
+}
+#content {
+  padding: 0px 125px;
+}
+#content ul {
+  padding-left: 100px;
+}
+#content img {
+  padding: 25px 0px;
+}
+#feedback img {
+  padding: 0px;
+}
+#navigation {
+  position: absolute;
+  width: 1000px;
+  top: 0px;
+  padding-top: 300px;
+  margin: auto;
+}
+.button {
+  display: block;
+  width: 154px;
+  height: 200px;
+  background-repeat: no-repeat;
+}
+#leftnav {
+  float: left;
+  background-image: url(leftnav_bw.png);
+  left: 50px;
+}
+#leftnav:hover {
+  background-image: url(leftnav.png);
+}
+#rightnav {
+  float: right;
+  background-image: url(rightnav_bw.png);
+  right: 50px;
+}
+#rightnav:hover {
+  background-image: url(rightnav.png);
+}
