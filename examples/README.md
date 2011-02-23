@@ -25,6 +25,12 @@ html file). NibJS is invoked as follows (see 1-basic/build):
 
     nibjs --libname=basic --standalone --output=basic.js lib
 
+## 2-coffee
+
+Same as the previous example, but written in coffeescript. NibJS invocation:
+
+    nibjs --coffee --libname=coffee --standalone --output=coffee.js lib
+
 ## Credits
 
 Icons used in examples are from www.veryicon.com, distributed under LGPL

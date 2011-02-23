@@ -11,3 +11,7 @@ body{
 #should {
   padding-left: 80px;
 }
+.comment {
+  text-align: justify;
+	font-size: 16px;
+}

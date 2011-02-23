@@ -10,14 +10,14 @@
 
   <!-- This is your application -->
   <script src="http://code.jquery.com/jquery-1.5.min.js" type="text/javascript"></script>
-  <script src="basic.js" type="text/javascript"></script>
+  <script src="coffee.js" type="text/javascript"></script>
   <script>
     $(document).ready(function(){
       //
       // this is how you require your application. App will now contain whatever 
       // your index.js has exported.
       //
-      App = NibJS.require('basic').App;
+      App = NibJS.require('coffee').App;
       
       //
       // Let me profit from your browser and run the integration tests :-)
@@ -30,5 +30,14 @@
   <body>
     <div id="feedback"><img src="../test-pending.gif"/></div>
     <p id="should">The example should say hello to the world, in upcase characters.</p>
+    <p class="comment">
+      It also demonstrates the effectiveness of using coffeescript for maintaining the 
+      source code. Used features: 
+      <ul class="comment">
+        <li><a href="http://jashkenas.github.com/coffee-script/#strings">string interpolation</a></li>
+        <li><a href="http://jashkenas.github.com/coffee-script/#destructuring">destructuring assignment</a></li>
+        <li><a href="http://jashkenas.github.com/coffee-script/#expressions">everything is an expression</a></li>
+      </ul>
+    </p>
   </body>
 </html>

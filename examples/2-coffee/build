@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+###
+### Following lines are equivalent to the following
+### (invoked in 1-basic dir):
+###
+###   nibjs --coffee --standalone --libname=coffee --output=coffee.js lib
+###
+
+require File.expand_path('../../commons', __FILE__)
+here = File.dirname(__FILE__)
+lib = File.join(here, 'lib')
+options = %q{--coffee --standalone --libname=coffee}
+output = File.join(here, 'coffee.js')
+nibjs(options, __output(output), lib)
