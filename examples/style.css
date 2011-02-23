@@ -1,9 +1,13 @@
 body{
 	font-family: corbel, 'lucida grande', helvetica, sans-serif;
-	font-size: 32px;
+	font-size: 24px;
 	color: #212122;
   width: 600px;
   margin: 100px auto;  
 }
-#feedback{
+#feedback {
+  position: fixed;
+}
+#should {
+  padding-left: 80px;
 }
