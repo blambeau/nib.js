@@ -16,17 +16,18 @@ variables:
   version:
     1.1.0
   summary: 
-    nib.js - Package and embed node.js or coffeescript libraries in the browser
+    nib.js - Package [java|coffee]script libraries for the browser
   description: |-
-    nib.js is a NibJS javascript library allowing to maintain javascript projects ala 'node.js'
-    (modules, exports, require) while also targetting a web browser as execution platform. It
+    nib.js is a library allowing to maintain javascript projects ala 'node.js' (CommonJS conventions
+    about modules, exports, require) while also targetting the web browser as execution platform. It
     contains a simple packager command (nibjs) that will convert your sources to a single and
     minified .js file to be embedded in the browser. Node.js's exports and require are correctly
-    bounded.
+    resolved.
   authors:
     - name: Bernard Lambeau
       email: blambeau@gmail.com
   links: 
+    - http://blambeau.github.com/nib.js
     - http://github.com/blambeau/nib.js
   dependencies: 
     # Rake is required for developers, as usual
