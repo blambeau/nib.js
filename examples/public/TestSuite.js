@@ -40,11 +40,11 @@ TestSuite = {
       var ok;
       try {
         ok = app.runTests();
-        $("#feedback img").attr('src', "../test-" + ok + ".png");
+        $("#feedback img").attr('src', "../public/test-" + ok + ".png");
         return TestSuite.runNext();
       } catch (err) {
         $("body").append("<p>" + err.message + "</p>");
-        $("#feedback img").attr('src', "../test-false.png");
+        $("#feedback img").attr('src', "../public/test-false.png");
         throw err;
       }
     };

@@ -42,12 +42,11 @@ begin
   end
 
   desc "Run integration tests"
-  task :"test:integration" do
-    shell_safe_exec("coffee --compile #{_('test/integration')}")
+  task :"test:integration" => :"examples:build" do
     puts "#"*100
     puts "Please open the URL below in your browser"
     puts "#"*100
-    puts shell_safe_exec("ruby #{_('test/integration/integration_test.rb')}").inspect
+    puts shell_safe_exec("ruby #{_('examples/handler.rb')}").inspect
   end
   
   desc "Bootstrap the test suite (rebuild command/*.exp)"
