@@ -248,7 +248,8 @@ module NibJS
     def with_standalone
       if standalone
         code = if coffee_output?
-          File.read(File.expand_path('../../../src/nibjs.coffee', __FILE__))
+          coffeesrc = File.read(File.expand_path('../../../src/nibjs.coffee', __FILE__))
+          "NibJSBuild = (exports)->\n" + coffeesrc.gsub(/^/m, '  ') + "\nNibJSBuild(this)\n"
         else
           File.read(File.expand_path("../../../dist/nibjs-#{NibJS::VERSION}.js", __FILE__))
         end

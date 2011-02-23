@@ -1,7 +1,7 @@
 var TestSuite;
 var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 TestSuite = {
-  tests: ['1-basic', '2-coffee'],
+  tests: ['1-basic', '2-coffee', '3-embedded-coffee'],
   indexOf: function(test) {
     var i, t, _len, _ref;
     _ref = TestSuite.tests;
@@ -29,7 +29,7 @@ TestSuite = {
     next = TestSuite.findNext();
     if (next != null) {
       moveNext = function() {
-        return window.location = "../" + next + "/index.html";
+        return window.location = "../" + next + "/index.html#" + next;
       };
       return setTimeout(moveNext, 500);
     }

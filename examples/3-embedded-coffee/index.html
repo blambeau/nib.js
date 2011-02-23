@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>NibJS - Basic Example</title>
+  
+  <!-- This is your application -->
+  <script src="http://code.jquery.com/jquery-1.5.min.js" type="text/javascript"></script>
+  <script src="../public/coffee-script.js" type="text/javascript"></script>
+  <script src="embedded-coffee.coffee" type="text/coffeescript"></script>
+  <script>
+    /* this is what we should have without coffeescript's issue 1054
+       https://github.com/jashkenas/coffee-script/issues/#issue/1054 */
+    function run(){
+      //
+      // this is how you require your application. App will now contain whatever 
+      // your index.js has exported.
+      //
+      App = NibJS.require('embedded-coffee').App;
+
+      //
+      // Let me profit from your browser and run the integration tests :-)
+      //
+      TestSuite.runOne(App);
+    }
+    
+    // this function will wait until the package has been built
+    function wait() {
+      try{ NibJS } catch (err){ setTimeout(wait, 100); return; }
+      if (NibJS.hasPackage('embedded-coffee')) {
+        run();
+      } else {
+        setTimeout(wait, 100);
+      }        
+    }
+    $(document).ready(function(){ wait(); });
+  </script>
+
+  <!-- This is some to be able to run integration tests -->
+  <link rel="stylesheet" type="text/css" href="../public/style.css">
+  <script src="../public/TestSuite.js" type="text/javascript"></script>
+
+</head>
+  <body>
+    <div id="feedback"><img src="../public/test-pending.gif"/></div>
+    <p id="should">The example should say hello to the world, in upcase characters.</p>
+    <p class="comment">
+      It also demonstrates the effectiveness of using coffeescript for maintaining the 
+      source code. Used features: 
+      <ul class="comment">
+        <li><a href="http://jashkenas.github.com/coffee-script/#strings">string interpolation</a></li>
+        <li><a href="http://jashkenas.github.com/coffee-script/#destructuring">destructuring assignment</a></li>
+        <li><a href="http://jashkenas.github.com/coffee-script/#expressions">everything is an expression</a></li>
+      </ul>
+    </p>
+    <p class="comment">
+      In addition to the previous example, the coffeescript source of this example is compiled by the browser
+      instead of being prepared by nibjs at packaging time. This coffeescript/nibjs feature is useful when coffee
+      compiler is not easily available on the server.
+    </p>
+  </body>
+</html>

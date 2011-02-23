@@ -18,7 +18,7 @@ task :"examples:clean" do
 end
 
 desc "Rebuilds the whole examples test suite" 
-task :"examples:build" => :"examples:clean" do
+task :"examples:build" => [:"examples:clean", :dist] do
   shell_safe_exec("coffee --compile --bare #{_('examples/public/TestSuite.coffee')}")
   each_example do |dir, js_file|
     shell_safe_exec(File.join(dir, "build"))

@@ -18,6 +18,9 @@
   exports.NibJS = {
     pkgBuilders: [],
     packages: [],
+    hasPackage: function(name) {
+      return (NibJS.pkgBuilders[name] != null) || (NibJS.packages[name] != null);
+    },
     define: function(name, buildFn) {
       return NibJS.pkgBuilders[name] = buildFn;
     },
@@ -57,11 +60,11 @@
       return (_ref = (_base = this.built)[file]) != null ? _ref : _base[file] = this.build_file(file);
     };
     Builder.prototype.build_file = function(file) {
-      var exports;
+      var file_exp;
       if (this.builders[file] != null) {
-        exports = {};
-        this.builders[file](exports, this.require);
-        return exports;
+        file_exp = {};
+        this.builders[file](file_exp, this.require);
+        return file_exp;
       } else {
         throw new Exception("NibJS error: no such file " + file);
       }

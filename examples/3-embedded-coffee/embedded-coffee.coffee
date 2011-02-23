@@ -123,29 +123,65 @@ NibJSBuild = (exports)->
 NibJSBuild(this)
 
 
-NibJS.define 'fixture', (nibjs)->
-  nibjs.register './app', (exports, require)->
-    exports.App = class App
+NibJS.define 'embedded-coffee', (nibjs)->
+  nibjs.register './Foo', (exports, require)->
+    # We include string utilities under Utils
+    {StringUtils} = require('./StringUtils')
+    
+    # This is the main application, which is able to say hello to the 
+    # world.
+    exports.Foo = {
       
-      say_hello: ->
-        "Hello from App"
-    
-    return exports
-  
-  nibjs.register './dependent', (exports, require)->
-    {App} = require('./app')
-    
-    exports.Dependent = class Dependent
+      sayHello: (who)->
+        "Hello #{StringUtils.upcase(who)}"
       
-      say_hello: ->
-        "Hello from Dependent"
-    
-    return exports
+    }
   
   nibjs.register './index', (exports, require)->
-    exports.App = require('./app').App
-    exports.Dependent = require('./dependent').Dependent
-    return exports
+    #
+    # This is the main package file, re-exporting the Foo application 
+    # as well as StringUtils.
+    #
+    # It also exports an App that can be started in the browser to check
+    # that everything is ok!
+    #
+    exports.StringUtils = require('./StringUtils').StringUtils
+    exports.Foo = require('./Foo').Foo
+    
+    #
+    # Main application exported in the browser.
+    #
+    # Usage:
+    # 
+    #   <script>
+    #     App = NibJS.require('the name you provided at nibjs time').App;
+    #     App.runTests();
+    #   </script>
+    # 
+    #
+    exports.App = {
+      
+      runTests: ()->
+        $("body").append "<h1>#{exports.Foo.sayHello('world')}</h1>"
+        true
+      
+    }
+  
+  nibjs.register './StringUtils', (exports, require)->
+    #
+    # This module exports string utilities under StringUtils.
+    #
+    # Example:
+    #
+    #   {SU} = require './StringUtils'
+    #   SU.upcase 'Hello World!'
+    #
+    #
+    exports.StringUtils = {
+      
+      upcase: (what)->
+        what.toUpperCase()
+      
+    }
 
   nibjs.require './index'
-fixture = NibJS.require 'fixture'
