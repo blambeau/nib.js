@@ -3,7 +3,8 @@ TestSuite = {
   tests: [
     '1-basic',
     '2-coffee',
-    '3-embedded-coffee'
+    '3-embedded-coffee',
+    '4-coffee-join'
   ],
   
   indexOf: (test)->
@@ -24,7 +25,7 @@ TestSuite = {
     if next?
       moveNext = ->
         window.location = "../#{next}/index.html##{next}"
-      setTimeout(moveNext, 500)
+      setTimeout(moveNext, 1000)
   
   runOne: (app)=>
     runit = ()->

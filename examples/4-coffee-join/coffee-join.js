@@ -73,27 +73,22 @@
   })();
 }).call(this, this);
 
-NibJS.define('coffee', function(nibjs) {
-  nibjs.register('./App', function(exports, require) {
-    var StringUtils;
-    StringUtils = require('./StringUtils').StringUtils;
-    return exports.App = {
+NibJS.define('coffee-join', function(nibjs) {
+  nibjs.register('./index', function(exports, require) {
+    var App, StringUtils;
+    App = {
       runTests: function() {
-        $("#hello").append("<h1>Have a " + (StringUtils.upcase('look at')) + " 'nibjs --coffee'</h1>");
+        $("#hello").append("<h1>'nibjs --join' option is for " + (StringUtils.upcase('you')) + "!</h1>");
         return true;
       }
     };
-  });
-  nibjs.register('./index', function(exports, require) {
-    exports.StringUtils = require('./StringUtils').StringUtils;
-    return exports.App = require('./App').App;
-  });
-  nibjs.register('./StringUtils', function(exports, require) {
-    return exports.StringUtils = {
+    StringUtils = {
       upcase: function(what) {
         return what.toUpperCase();
       }
     };
+    exports.StringUtils = StringUtils;
+    return exports.App = App;
   });
   return nibjs.require('./index');
 });

@@ -74,62 +74,22 @@
 }).call(this, this);
 
 NibJS.define('basic', function(nibjs) {
-  nibjs.register('./Foo', function(exports, require) {
-    /* We include string utilities under Utils */
-    Utils = require('./StringUtils').StringUtils;
-    
-    /* This is the main application, which is able to say hello to the 
-     * world. */
-    exports.Foo = {
-      
-      sayHello: function(who){
-        return "Hello " + Utils.upcase(who);
-      }
-      
-    };
-  });
-  nibjs.register('./index', function(exports, require) {
-    /*
-     * This is the main package file, re-exporting the Foo application 
-     * as well as StringUtils.
-     *
-     * It also exports an App that can be started in the browser to check
-     * that everything is ok!
-     */
-    exports.StringUtils = require('./StringUtils').StringUtils;
-    exports.Foo = require('./Foo').Foo;
-    
-    /*
-     * Main application exported in the browser.
-     *
-     * Usage:
-     * 
-     *   <script>
-     *     App = NibJS.require('the name you provided at nibjs time').App;
-     *     App.runTests();
-     *   </script>
-     * 
-     */
+  nibjs.register('./App', function(exports, require) {
+    var StringUtils = require('./StringUtils').StringUtils;
     exports.App = {
       
       runTests: function(){
-        var hello = exports.Foo.sayHello("world");
-        $("body").append("<h1>" + hello + "</h1>");
+        $("body").append("<h1>NibJS " + StringUtils.upcase("rocks!") + "</h1>");
         return true;
       }
       
     };
   });
+  nibjs.register('./index', function(exports, require) {
+    exports.StringUtils = require('./StringUtils').StringUtils;
+    exports.App = require('./App').App;
+  });
   nibjs.register('./StringUtils', function(exports, require) {
-    /**
-     * This module exports string utilities under StringUtils.
-     *
-     * Example:
-     *
-     *   SU = require('./StringUtils').StringUtils;
-     *   SU.upcase('Hello World!');
-     *
-     */
     exports.StringUtils = {
       
       upcase: function(what){

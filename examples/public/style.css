@@ -7,11 +7,20 @@ body{
 }
 #feedback {
   position: fixed;
+  height: 75px;
 }
 #should {
   padding-left: 80px;
+  height: 75px;
 }
 .comment {
   text-align: justify;
 	font-size: 16px;
+}
+h1 {
+  text-align: center;
+  font-size: 24px;
+}
+.tip {
+  display: none;
 }

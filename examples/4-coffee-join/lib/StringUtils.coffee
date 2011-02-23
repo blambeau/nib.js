@@ -1,4 +1,4 @@
-exports.StringUtils = {
+StringUtils = {
   
   upcase: (what)->
     what.toUpperCase()
