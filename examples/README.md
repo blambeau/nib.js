@@ -44,6 +44,9 @@ the coffeescript sources are compiled in javascript by the browser itself.
 
     nibjs --coffee --no-coffee-compile --libname=embedded-coffee --output=embedded-coffee.coffee lib
 
+This example makes an AJAX call and will not work by simply opening the index.html
+file in your browser.
+
 ## 4-coffee-join
 
 The fourth example illustrates a way to avoid having to use CommonJS/Node.js require
@@ -65,8 +68,8 @@ generated .js file.
 Some icons used in examples are from www.veryicon.com, distributed under LGPL licence with 
 following licence information:
 
-TITLE:	Crystal Project Icons
-AUTHOR:	Everaldo Coelho
-SITE:	http://www.everaldo.com
-CONTACT: everaldo@everaldo.com
-LICENSE: LGPL
+* TITLE:   Crystal Project Icons
+* AUTHOR:	 Everaldo Coelho
+* SITE:	   http://www.everaldo.com
+* CONTACT: everaldo@everaldo.com
+* LICENSE: LGPL
