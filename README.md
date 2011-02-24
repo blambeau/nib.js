@@ -13,6 +13,8 @@ resolved.
     gem install nibjs
     nibjs --help 
 
+See also the online presentation at http://blambeau.github.com/nib.js
+
 ## How to use it
 
 Let assume that your project has the structure below. 
