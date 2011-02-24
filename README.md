@@ -13,7 +13,7 @@ resolved.
     gem install nibjs
     nibjs --help 
 
-See also the online presentation at http://blambeau.github.com/nib.js
+See also the online presentation at [http://blambeau.github.com/nib.js](http://blambeau.github.com/nib.js)
 
 ## How to use it
 
@@ -87,11 +87,11 @@ This project is related to CommonJS Module specification. In a sense, it is an o
 I'll strongly consider any patch that would lead to respecting such specification more
 completely!
 
-* http://wiki.commonjs.org/wiki/Modules/1.0
-* http://wiki.commonjs.org/wiki/Modules/CompiledModules
+* [http://wiki.commonjs.org/wiki/Modules/1.0](http://wiki.commonjs.org/wiki/Modules/1.0)
+* [http://wiki.commonjs.org/wiki/Modules/CompiledModules](http://wiki.commonjs.org/wiki/Modules/CompiledModules)
 
 Other projects that implement the CommonJS module specification in a similar way:
 
-* https://github.com/rsms/browser-require
-* https://github.com/weepy/brequire
-* https://github.com/afriggeri/ristretto
+* [https://github.com/rsms/browser-require](https://github.com/rsms/browser-require)
+* [https://github.com/weepy/brequire](https://github.com/weepy/brequire)
+* [https://github.com/afriggeri/ristretto](https://github.com/afriggeri/ristretto)
