@@ -21,16 +21,16 @@ Gem::Specification.new do |s|
   # A short summary of this gem
   #
   # This is displayed in `gem list -d`.
-  s.summary = "nib.js - Package and embed node.js or coffeescript libraries in the browser"
+  s.summary = "nib.js - Package [java|coffee]script libraries for the browser"
 
   # A long description of this gem (required)
   #
   # The description should be more detailed than the summary.  For example,
   # you might wish to copy the entire README into the description.
-  s.description = "nib.js is a NibJS javascript library allowing to maintain javascript projects ala 'node.js'\n(modules, exports, require) while also targetting a web browser as execution platform. It\ncontains a simple packager command (nibjs) that will convert your sources to a single and\nminified .js file to be embedded in the browser. Node.js's exports and require are correctly\nbounded."
+  s.description = "nib.js is a library allowing to maintain javascript projects ala 'node.js' (CommonJS conventions\nabout modules, exports, require) while also targetting the web browser as execution platform. It\ncontains a simple packager command (nibjs) that will convert your sources to a single and\nminified .js file to be embedded in the browser. Node.js's exports and require are correctly\nresolved."
   
   # The URL of this gem home page (optional)
-  s.homepage = "http://github.com/blambeau/nib.js"
+  s.homepage = "http://blambeau.github.com/nib.js"
 
   # Gem publication date (required but auto)
   #

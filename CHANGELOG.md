@@ -1,3 +1,10 @@
+# 1.2.0 / FIX ME
+
+* Enhancements
+
+  * Github pages (examples & documentation) have been corrected on small details
+  * README update with correct examples
+
 # 1.1.0 / 2011-02-23
 
 * Enhancements
