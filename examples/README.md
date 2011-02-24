@@ -11,30 +11,59 @@ Each example is self-contained, and respects the following folder structure:
         ...             # java/coffee script source files
         
 Examples are kept built in the sources, so that they can be executed immediately
-in a browser. In other words, opening any x-example/index.html file in a browser
-should work. Otherwise, please report the bug on github.
+in a browser. In other words and unless stated otherwise (some examples may depend
+on ajax call) opening any x-example/index.html file in a browser should work. 
 
-Please report any error on "github":https://github.com/blambeau/nib.js/issues
+These examples are also visible online on the project's 
+[github pages](http://blambeau.github.com/nib.js/). The following commands can also
+be used to rebuild then run the examples on your machine (requires devel dependencies):
+
+    rake examples:build
+    rake test:integration
+
+Please report any bug on [github](https://github.com/blambeau/nib.js/issues)
 
 ## 1-basic
 
 Demonstrates a simple use case where you maintain an application as well as some
 utility modules and compile them as a single self-contained .js file ready for 
-inclusion in the browser (you don't even need to include nibjs itself in your
-html file). NibJS is invoked as follows (see 1-basic/build):
+inclusion in the browser. NibJS is invoked as follows (see 1-basic/build):
 
-    nibjs --libname=basic --standalone --output=basic.js lib
+    nibjs --libname=basic --output=basic.js lib
 
 ## 2-coffee
 
 Same as the previous example, but written in coffeescript. NibJS invocation:
 
-    nibjs --coffee --libname=coffee --standalone --output=coffee.js lib
+    nibjs --coffee --libname=coffee --output=coffee.js lib
+
+## 3-embedded-coffee
+
+In this third example the coffee compiler is not even required server-side, as 
+the coffeescript sources are compiled in javascript by the browser itself. 
+
+    nibjs --coffee --no-coffee-compile --libname=embedded-coffee --output=embedded-coffee.coffee lib
+
+## 4-coffee-join
+
+The fourth example illustrates a way to avoid having to use CommonJS/Node.js require
+and exports everywhere. Using the --join option will treat the sources "as if they were
+a single file", with a common local scope.
+
+    nibjs --coffee --join --libname=coffee-join --output=coffee-join.js lib
+    
+## 5-standalone
+
+This last example shows how to get rid of having to distribute nibjs.js itself with your
+own library. The --standalone option will make sure that NibJS itself is included in the
+generated .js file.
+
+    nibjs --coffee --join --standalone --libname=standalone --output=standalone.js lib
 
 ## Credits
 
-Icons used in examples are from www.veryicon.com, distributed under LGPL
-licence with following licence information:
+Some icons used in examples are from www.veryicon.com, distributed under LGPL licence with 
+following licence information:
 
 TITLE:	Crystal Project Icons
 AUTHOR:	Everaldo Coelho
