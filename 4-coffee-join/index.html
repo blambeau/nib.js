@@ -33,16 +33,16 @@
       <div id="feedback"><img src="../public/test-pending.gif"/></div>
       <h2>Do exports.XXX and require('./XXX') look painful?</h2>
       <p class="comment">
-        Sometimes, you simply want to maintain your code source "as if it were in a single file"
-        but still splitting different features in different files... In that case, you would like 
-        to avoid having to exports and require everything everytime.
+        Sometimes, you want to maintain your code source "as if it were in a single file" but keeping 
+        the ability to split different features in different files... In that case, you would 
+        like to avoid having to exports and require everything everytime.
       </p>
       <div style="text-align:center">
         <img src="illustrate.png" width="80%">
       </div>
       <p class="comment">
         This should only be used if your code 1) has no name clash accross different files and 2) 
-        has no particular dependency order.
+        do not expect a particular load order between the different files.
       </p>
     </div>
     <div id="navigation">
