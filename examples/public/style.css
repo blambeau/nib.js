@@ -3,7 +3,7 @@ body{
 	font-size: 24px;
 	color: #212122;
   width: 1000px;
-  margin: 100px auto;  
+  margin: 75px auto;  
 }
 #forkme {
   position: absolute;
@@ -17,6 +17,7 @@ body{
 #feedback {
   float: left;
   height: 96px;
+  width: 96px;
   padding: 10px 0px;
   vertical-align: middle;
 }
